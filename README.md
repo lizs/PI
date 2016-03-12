@@ -1,4 +1,5 @@
-C# 分布式游戏服务框架（基于socket4net : https://github.com/lizs/Socket4Net）
+C# 分布式游戏服务框架（基于socket4net）
+socket4net链接：https://github.com/lizs/Socket4Net
 
 参考Sample：Server/Client
 
