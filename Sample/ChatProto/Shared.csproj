@@ -77,9 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ecs\Pi.ecs.csproj">
+    <ProjectReference Include="..\..\ecs\Pi.Framework.csproj">
       <Project>{76C25DE3-C35B-48C6-A7DD-039C89EE7453}</Project>
-      <Name>Pi.ecs</Name>
+      <Name>Pi.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

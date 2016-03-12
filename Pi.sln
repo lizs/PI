@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{9DBF46
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Sample\ChatProto\Shared.csproj", "{B4AF3B64-7884-4864-B007-DD3B59A084D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.ecs", "ecs\Pi.ecs.csproj", "{76C25DE3-C35B-48C6-A7DD-039C89EE7453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.Framework", "ecs\Pi.Framework.csproj", "{76C25DE3-C35B-48C6-A7DD-039C89EE7453}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Sample\Client\Client.csproj", "{C5CD98E3-82B5-4E62-B19A-4B09FCAE3CAB}"
 EndProject
