@@ -35,16 +35,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\2\work\DotaServer\PI-master\Build\Dependencies\NET45\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Logger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Depedencies\Logger.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\2\work\DotaServer\PI-master\Build\Dependencies\protobuf-net.dll</HintPath>
+      <HintPath>..\..\Depedencies\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ecs\Pi.Framework.csproj">
+    <ProjectReference Include="..\..\Pi.Framework\Pi.Framework.csproj">
       <Project>{76c25de3-c35b-48c6-a7dd-039c89ee7453}</Project>
       <Name>Pi.Framework</Name>
     </ProjectReference>

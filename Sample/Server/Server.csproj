@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Depedencies\Logger.dll</HintPath>
     </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\Depedencies\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Depedencies\socket4net.dll</HintPath>
@@ -63,8 +66,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ecs\Pi.Framework.csproj">
-      <Project>{76C25DE3-C35B-48C6-A7DD-039C89EE7453}</Project>
+    <ProjectReference Include="..\..\Pi.Framework\Pi.Framework.csproj">
+      <Project>{76c25de3-c35b-48c6-a7dd-039c89ee7453}</Project>
       <Name>Pi.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChatProto\Shared.csproj">

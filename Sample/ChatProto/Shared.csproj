@@ -55,9 +55,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="protobuf-net, Version=1.0.0.282, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\2\work\DotaServer\PI-master\Build\Dependencies\protobuf-net.dll</HintPath>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\Depedencies\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -77,8 +76,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ecs\Pi.Framework.csproj">
-      <Project>{76C25DE3-C35B-48C6-A7DD-039C89EE7453}</Project>
+    <ProjectReference Include="..\..\Pi.Framework\Pi.Framework.csproj">
+      <Project>{76c25de3-c35b-48c6-a7dd-039c89ee7453}</Project>
       <Name>Pi.Framework</Name>
     </ProjectReference>
   </ItemGroup>
