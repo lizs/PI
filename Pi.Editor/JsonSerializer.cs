@@ -1,24 +1,17 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Pi.Editor
 {
     public interface IFileReader
     {
         string ReadText(string path);
-        byte[] ReadBytes(string path);
     }
 
     public class DefaultFileReader : IFileReader
     {
         public string ReadText(string path)
         {
-            return File.ReadAllText(path);
-        }
-
-        public byte[] ReadBytes(string path)
-        {
-            return File.ReadAllBytes(path);
+            return FileSys.ReadFile(path);
         }
     }
 
@@ -31,19 +24,14 @@ namespace Pi.Editor
             set { _fileReader = value; }
         }
 
-        public static ComponentDef DeserializeComponent(string path)
+        public static T Deserialize<T>(string path)
         {
-            return JsonConvert.DeserializeObject<ComponentDef>(FileReader.ReadText(path));
+            return JsonConvert.DeserializeObject<T>(FileReader.ReadText(path));
         }
 
-        public static PropertyDef DeserializeProperty(string path)
+        public static string Serialize(object obj)
         {
-            return JsonConvert.DeserializeObject<PropertyDef>(FileReader.ReadText(path));
-        }
-
-        public static EntityDef DeserializeEntity(string path)
-        {
-            return JsonConvert.DeserializeObject<EntityDef>(FileReader.ReadText(path));
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 
 namespace Pi.Editor
 {
@@ -9,42 +7,46 @@ namespace Pi.Editor
     {
         static void Main(string[] args)
         {
-            var path = "test.json";
+            //var x = new BlockMakerDef()
+            //{
+            //    Comment = "属性定义",
+            //    Blocks = new List<PropertyDef>()
+            //    {
+            //        new PropertyDef()
+            //        {
+            //            PropertyId = "One",
+            //            DefaultValue = "1",
+            //            ItemType = "int",
+            //            Type = "Settable",
+            //        },
+            //        new PropertyDef()
+            //        {
+            //            PropertyId = "Tow",
+            //            DefaultValue = "1",
+            //            ItemType = "int",
+            //            Type = "Increasable",
+            //        }
+            //    }
+            //};
 
-            var entity = new EntityDef()
-            {
-                Name = "MyEntity",
-                Class = "namespace.class, assembly",
-                Components = new List<ComponentDef>()
-                {
-                    new ComponentDef() {Class = "namespace.class1, assembly", ComponentId = 1},
-                    new ComponentDef() {Class = "namespace.class2, assembly", ComponentId = 2},
-                    new ComponentDef() {Class = "namespace.class3, assembly", ComponentId = 3},
-                    new ComponentDef() {Class = "namespace.class4, assembly", ComponentId = 4},
-                },
+            //FileSys.WriteToFile("Block.json", JsonSerializer.Serialize(x));
+            //return;
 
-                Properties = new List<PropertyDef>()
-                {
-                    new PropertyDef() {PropertyId = 1, Type = EPropertyType.Increasable},
-                    new PropertyDef() {PropertyId = 2, Type = EPropertyType.Settable},
-                    new PropertyDef() {PropertyId = 3, Type = EPropertyType.List},
-                    new PropertyDef() {PropertyId = 4, Type = EPropertyType.Increasable},
-                }
-            };
 
-            using (var sm = new FileStream(path, FileMode.Create))
-            using(var fw = new StreamWriter(sm))
-            {
-                fw.Write(JsonConvert.SerializeObject(entity, Formatting.Indented));
-            }
+            // generic cs
+            Console.WriteLine("Generate cs...");
+            CsharpGenerator.Gen();
 
-            using (var sm = new FileStream(path, FileMode.Open))
-            using (var fr = new StreamReader(sm))
-            {
-                var deserializedEntity = JsonConvert.DeserializeObject<EntityDef>(fr.ReadToEnd());
-            }
+            // generic pb
+            Console.WriteLine("Generate protos...");
+            ProtoGenerator.Gen();
 
-            Console.ReadLine();
+            // compile
+            Console.WriteLine("Compiling to Pi.Gen.dll...");
+            Compiler.Compile();
+
+            Console.WriteLine("Success, Press any key to exit!");
+            Console.ReadKey();
         }
     }
 }

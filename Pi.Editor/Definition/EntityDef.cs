@@ -8,7 +8,7 @@ namespace Pi.Editor
     ///     1、组件
     ///     2、属性
     /// </summary>
-    public class EntityDef
+    internal class EntityDef
     {
         /// <summary>
         ///     名字

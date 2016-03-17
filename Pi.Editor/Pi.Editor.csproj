@@ -41,14 +41,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeGenerator\CodeGenerator.cs" />
-    <None Include="CodeGenerator\Templates\EPid.Template" />
-    <Compile Include="CodeGenerator\PropertyGenerator.cs" />
+    <Compile Include="CodeGenerator\ConstGenerator.cs" />
+    <Compile Include="CodeGenerator\CsharpGenerator.cs" />
+    <Compile Include="CommandlineTool.cs" />
+    <Compile Include="CodeGenerator\ProtoGenerator.cs" />
+    <Compile Include="Definition\EDefType.cs" />
+    <Compile Include="CodeGenerator\EnumGenerator.cs" />
+    <Compile Include="CodeGenerator\TemplateProvider.cs" />
+    <Compile Include="Compiler\Compiler.cs" />
     <Compile Include="Definition\ComponentDef.cs" />
     <Compile Include="Definition\EntityDef.cs" />
+    <Compile Include="Environment.cs" />
+    <Compile Include="FileSys.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Definition\PropertyDef.cs" />
+    <Compile Include="CodeGenerator\BlockMakerGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Files\Environment.json" />
+    <None Include="Files\Templates\Const.template" />
+    <None Include="Files\Templates\Block.template" />
+    <None Include="Files\Templates\Entity.template" />
+    <None Include="Files\Templates\Enum.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

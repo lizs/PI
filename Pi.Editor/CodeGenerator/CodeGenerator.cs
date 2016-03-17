@@ -1,5 +1,3 @@
-using System.IO;
-using System.Text;
 
 namespace Pi.Editor
 {
@@ -8,49 +6,33 @@ namespace Pi.Editor
     /// </summary>
     internal abstract class CodeGenerator
     {
-        /// <summary>
-        ///     文件后缀
-        /// </summary>
-        private string _extension = "cs";
-        public string Extention
+        public string DefinitionPath { get; private set; }
+        protected CodeGenerator(string defPath)
         {
-            get { return _extension; }
-            set { _extension = value; }
+            DefinitionPath = defPath;
         }
 
-        /// <summary>
-        ///     文件名
-        /// </summary>
-        public string FileName { get; set; }
+        public abstract void Gen();
+    }
 
-        /// <summary>
-        ///     模板
-        /// </summary>
-        public string Template { get; set; }
-
-        /// <summary>
-        ///     根
-        /// </summary>
-        public string Root { get; set; }
-
-        /// <summary>
-        ///     全名
-        /// </summary>
-        public string FullName
+    internal class CodeGeneratorFactory
+    {
+        public static CodeGenerator Create(EDefType type, string defPath)
         {
-            get { return Path.Combine(Root, FileName + "." + Extention); }
-        }
+            switch (type)
+            {
+                case EDefType.Enum:
+                    return new EnumGenerator(defPath);
 
-        public void Generate()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("using Pi.Framework");
-            sb.AppendLine("namespace Pi.Gen");
-            sb.AppendLine("{");
-            sb.Append(Gen());
-            sb.AppendLine("}");
-        }
+                case EDefType.Const:
+                    return new ConstGenerator(defPath);
 
-        protected abstract string Gen();
+                case EDefType.Block:
+                    return new BlockMakerGenerator(defPath);
+
+                default:
+                    return null;
+            }
+        }
     }
 }

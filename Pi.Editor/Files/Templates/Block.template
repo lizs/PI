@@ -1,0 +1,33 @@
+﻿using Pi.Framework;
+using System.Collections.Generic;
+namespace Pi.Gen
+{{
+    /// <summary>
+    ///     {0}
+    /// </summary>
+	public static class BlockMaker
+    {{
+        public static IBlock Create(short pid)
+        {{
+            return Create((EPid) pid);
+        }}
+
+        public static IBlock Create(EPid epid)
+        {{
+            if (!Enum.IsDefined(typeof(EPid), epid))
+                throw new ArgumentException("epid");
+
+            if (Blocks.ContainsKey(epid))
+                return Blocks[epid];
+
+            throw new NotImplementedException(epid.ToString());
+        }}
+
+		private static readonly Dictionary<EPid, IBlock> Blocks = new Dictionary<EPid, IBlock>()
+        {{
+{1}
+        }}; 
+    }}
+}}
+
+	

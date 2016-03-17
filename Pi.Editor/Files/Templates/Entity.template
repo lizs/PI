@@ -1,0 +1,27 @@
+﻿using Pi.Framework;
+namespace Pi.Gen
+{{
+    /// <summary>
+    ///     {0}
+    /// </summary>
+    public partial class {1} : Entity
+    {{
+        protected override void OnInit(ObjArg arg)
+        {{
+            base.OnInit(arg);
+
+			// inject blocks
+{2}
+        }}
+      
+        protected override void SpawnComponents()
+        {{
+            base.SpawnComponents();
+
+			// add components
+{3}
+        }}
+    }}
+}}
+
+	

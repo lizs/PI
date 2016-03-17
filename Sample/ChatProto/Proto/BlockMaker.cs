@@ -23,6 +23,7 @@
 //   * */
 #endregion
 using System;
+using System.Collections.Generic;
 using Pi.Framework;
 
 namespace Shared
@@ -39,21 +40,17 @@ namespace Shared
             if (!Enum.IsDefined(typeof(EPid), epid))
                 throw new ArgumentException("epid");
 
-            var pid = (short) epid;
-            switch (epid)
-            {
-                case EPid.One:
-                    return new SettableBlock<int>(pid, 1, EBlockMode.Synchronizable);
+            if (Blocks.ContainsKey(epid))
+                return Blocks[epid];
 
-                case EPid.Two:
-                    return new IncreasableBlock<int>(pid, 2, EBlockMode.Synchronizable, 0, 10);
-
-                case EPid.Three:
-                    return new ListBlock<int>(pid, new []{1, 2, 3}, EBlockMode.Synchronizable);
-
-                default:
-                    throw new NotImplementedException(pid.ToString());
-            }
+            throw new NotImplementedException(epid.ToString());
         }
+
+        private static readonly Dictionary<EPid, IBlock> Blocks = new Dictionary<EPid, IBlock>()
+        {
+            {EPid.One, new SettableBlock<int>((short)EPid.One, 1, EBlockMode.Synchronizable)},
+            {EPid.Two, new IncreasableBlock<int>((short)EPid.Two, 2, EBlockMode.Synchronizable, 0, 10)},
+            {EPid.Three, new ListBlock<int>((short)EPid.Three, new []{1, 2, 3}, EBlockMode.Synchronizable)},
+        }; 
     }
 }
