@@ -1,31 +1,25 @@
-ï»¿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Pi.Editor
 {
-    public enum EPropertyType
-    {
-        Settable,
-        Increasable,
-        List,
-    }
-
     /// <summary>
-    ///     å±æ€§é…ç½®
+    ///     ×é¼şÅäÖÃ
     /// </summary>
-    public class PropertyCfg
+    public class ComponentDef
     {
         /// <summary>
-        ///     å±æ€§Id
+        ///     ×é¼şId
         /// </summary>
-        public short PropertyId { get; set; }
+        public short ComponentId { get; set; }
 
         /// <summary>
-        ///     å±æ€§ç±»å‹
+        ///     ×é¼şÀà
+        ///     ¸ñÊ½Èç£º"namespace.class, assembly"
         /// </summary>
-        public EPropertyType Type { get; set; }
+        public string Class { get; set; }
         
         /// <summary>
-        ///     åºåˆ—åŒ–
+        ///     ĞòÁĞ»¯
         /// </summary>
         /// <returns></returns>
         public string Serialize()

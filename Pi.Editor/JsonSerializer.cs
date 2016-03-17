@@ -31,19 +31,19 @@ namespace Pi.Editor
             set { _fileReader = value; }
         }
 
-        public static ComponentCfg DeserializeComponent(string path)
+        public static ComponentDef DeserializeComponent(string path)
         {
-            return JsonConvert.DeserializeObject<ComponentCfg>(FileReader.ReadText(path));
+            return JsonConvert.DeserializeObject<ComponentDef>(FileReader.ReadText(path));
         }
 
-        public static PropertyCfg DeserializeProperty(string path)
+        public static PropertyDef DeserializeProperty(string path)
         {
-            return JsonConvert.DeserializeObject<PropertyCfg>(FileReader.ReadText(path));
+            return JsonConvert.DeserializeObject<PropertyDef>(FileReader.ReadText(path));
         }
 
-        public static EntityCfg DeserializeEntity(string path)
+        public static EntityDef DeserializeEntity(string path)
         {
-            return JsonConvert.DeserializeObject<EntityCfg>(FileReader.ReadText(path));
+            return JsonConvert.DeserializeObject<EntityDef>(FileReader.ReadText(path));
         }
     }
 }

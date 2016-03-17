@@ -1,11 +1,12 @@
 using System.IO;
+using System.Text;
 
 namespace Pi.Editor
 {
     /// <summary>
     ///     cs文件生成器
     /// </summary>
-    internal class CodeGenerator
+    internal abstract class CodeGenerator
     {
         /// <summary>
         ///     文件后缀
@@ -23,6 +24,11 @@ namespace Pi.Editor
         public string FileName { get; set; }
 
         /// <summary>
+        ///     模板
+        /// </summary>
+        public string Template { get; set; }
+
+        /// <summary>
         ///     根
         /// </summary>
         public string Root { get; set; }
@@ -34,5 +40,17 @@ namespace Pi.Editor
         {
             get { return Path.Combine(Root, FileName + "." + Extention); }
         }
+
+        public void Generate()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("using Pi.Framework");
+            sb.AppendLine("namespace Pi.Gen");
+            sb.AppendLine("{");
+            sb.Append(Gen());
+            sb.AppendLine("}");
+        }
+
+        protected abstract string Gen();
     }
 }

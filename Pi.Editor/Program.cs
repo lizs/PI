@@ -11,23 +11,24 @@ namespace Pi.Editor
         {
             var path = "test.json";
 
-            var entity = new EntityCfg()
+            var entity = new EntityDef()
             {
                 Name = "MyEntity",
-                Components = new List<ComponentCfg>()
+                Class = "namespace.class, assembly",
+                Components = new List<ComponentDef>()
                 {
-                    new ComponentCfg() {Class = "namespace.class1, assembly", ComponentId = 1},
-                    new ComponentCfg() {Class = "namespace.class2, assembly", ComponentId = 2},
-                    new ComponentCfg() {Class = "namespace.class3, assembly", ComponentId = 3},
-                    new ComponentCfg() {Class = "namespace.class4, assembly", ComponentId = 4},
+                    new ComponentDef() {Class = "namespace.class1, assembly", ComponentId = 1},
+                    new ComponentDef() {Class = "namespace.class2, assembly", ComponentId = 2},
+                    new ComponentDef() {Class = "namespace.class3, assembly", ComponentId = 3},
+                    new ComponentDef() {Class = "namespace.class4, assembly", ComponentId = 4},
                 },
 
-                Properties = new List<PropertyCfg>()
+                Properties = new List<PropertyDef>()
                 {
-                    new PropertyCfg() {PropertyId = 1, Type = EPropertyType.Increasable},
-                    new PropertyCfg() {PropertyId = 2, Type = EPropertyType.Settable},
-                    new PropertyCfg() {PropertyId = 3, Type = EPropertyType.List},
-                    new PropertyCfg() {PropertyId = 4, Type = EPropertyType.Increasable},
+                    new PropertyDef() {PropertyId = 1, Type = EPropertyType.Increasable},
+                    new PropertyDef() {PropertyId = 2, Type = EPropertyType.Settable},
+                    new PropertyDef() {PropertyId = 3, Type = EPropertyType.List},
+                    new PropertyDef() {PropertyId = 4, Type = EPropertyType.Increasable},
                 }
             };
 
@@ -40,7 +41,7 @@ namespace Pi.Editor
             using (var sm = new FileStream(path, FileMode.Open))
             using (var fr = new StreamReader(sm))
             {
-                var deserializedEntity = JsonConvert.DeserializeObject<EntityCfg>(fr.ReadToEnd());
+                var deserializedEntity = JsonConvert.DeserializeObject<EntityDef>(fr.ReadToEnd());
             }
 
             Console.ReadLine();

@@ -8,7 +8,7 @@ namespace Pi.Editor
     ///     1、组件
     ///     2、属性
     /// </summary>
-    public class EntityCfg
+    public class EntityDef
     {
         /// <summary>
         ///     名字
@@ -16,14 +16,20 @@ namespace Pi.Editor
         public string Name { get; set; }
 
         /// <summary>
+        ///     类
+        ///     如："namespace.class, assembly"
+        /// </summary>
+        public string Class { get; set; }
+
+        /// <summary>
         ///     属性
         /// </summary>
-        public List<PropertyCfg> Properties { get; set; }
+        public List<PropertyDef> Properties { get; set; }
 
         /// <summary>
         ///     组件
         /// </summary>
-        public List<ComponentCfg> Components { get; set; }
+        public List<ComponentDef> Components { get; set; }
 
         /// <summary>
         ///     序列化

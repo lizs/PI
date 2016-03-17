@@ -41,12 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeGenerator\CodeGenerator.cs" />
+    <None Include="CodeGenerator\Templates\EPid.Template" />
     <Compile Include="CodeGenerator\PropertyGenerator.cs" />
-    <Compile Include="ComponentCfg.cs" />
-    <Compile Include="EntityCfg.cs" />
+    <Compile Include="Definition\ComponentDef.cs" />
+    <Compile Include="Definition\EntityDef.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="PropertyCfg.cs" />
+    <Compile Include="Definition\PropertyDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
