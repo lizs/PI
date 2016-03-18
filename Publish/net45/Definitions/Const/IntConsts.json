@@ -1,0 +1,19 @@
+{
+  "Comment": "Int32常量定义",
+  "ValueType": "int",
+  "ClassName": "IntConsts",
+  "Values": [
+    {
+      "Key": "One",
+      "Value": "1"
+    },
+    {
+      "Key": "Two",
+      "Value": "2"
+    },
+    {
+      "Key": "Three",
+      "Value": "3"
+    }
+  ]
+}

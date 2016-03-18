@@ -1,6 +1,5 @@
 ﻿using Pi.Framework;
 using socket4net;
-using System.Collections.Generic;
 namespace Pi.Gen
 {{
     /// <summary>
@@ -26,10 +25,6 @@ namespace Pi.Gen
 			// add components
 {3}
         }}
-
-		#region properties
-{4}
-		#endregion
     }}
 }}
 

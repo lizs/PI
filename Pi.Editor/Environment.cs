@@ -1,6 +1,4 @@
-﻿
-using System.Dynamic;
-using System.IO;
+﻿using System.IO;
 
 namespace Pi.Editor
 {
@@ -11,16 +9,17 @@ namespace Pi.Editor
     {
         public const string EnvironmentJsonFile = "Environment.json";
         private static Environment _ins;
-        private string _templatesPath = "Templates";
-        private string _scriptsPath = "Scripts";
+        private const string _templatesPath = "Templates";
+        private const string _scriptsPath = "Scripts";
         private string _dllOutputPath = "Assembly";
         private string _outputFileName = "Pi.Gen";
-        private string _defRoot = "Definitions";
+        private const string _defRoot = "Definitions";
         private readonly string _blocksDefPath = string.Format("Definitions/{0}", EDefType.Block);
         private readonly string _constsDefPath = string.Format("Definitions/{0}", EDefType.Const);
         private readonly string _enumsDefPath = string.Format("Definitions/{0}", EDefType.Enum);
         private readonly string _entitiesDefPath = string.Format("Definitions/{0}", EDefType.Entity);
-        
+        private const string ProtosDefDefPath = "Definitions/Proto";
+
         public static Environment Ins
         {
             get
@@ -33,7 +32,7 @@ namespace Pi.Editor
                 CreateDirectories(new[]
                 {
                     _ins.TemplatesPath, _ins.ScriptsPath, _ins.DllOutputPath, _ins.BlocksDefPath, _ins.ConstsDefPath,
-                    _ins.EnumsDefPath, _ins.EntitiesDefPath
+                    _ins.EnumsDefPath, _ins.EntitiesDefPath, _ins.ProtosDefPath, _ins.EntityScriptsPath
                 });
 
                 return _ins;
@@ -76,7 +75,6 @@ namespace Pi.Editor
         public string TemplatesPath
         {
             get { return _templatesPath; }
-            set { _templatesPath = value; }
         }
 
         /// <summary>
@@ -85,7 +83,22 @@ namespace Pi.Editor
         public string ScriptsPath
         {
             get { return _scriptsPath; }
-            set { _scriptsPath = value; }
+        }
+        
+        /// <summary>
+        ///     脚本根
+        /// </summary>
+        public string EntityScriptsPath
+        {
+            get { return string.Format("{0}/{1}", ScriptsPath, EDefType.Entity); }
+        }
+
+        /// <summary>
+        ///     proto根
+        /// </summary>
+        public string ProtosDefPath
+        {
+            get { return ProtosDefDefPath; }
         }
 
         /// <summary>
@@ -103,7 +116,6 @@ namespace Pi.Editor
         public string DefRoot
         {
             get { return _defRoot; }
-            set { _defRoot = value; }
         }
 
         /// <summary>

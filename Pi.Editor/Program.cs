@@ -26,6 +26,10 @@ namespace Pi.Editor
           HelpText = "Compile to generate assembly")]
         public bool Compile { get; set; }
 
+        [Option('l', "lite", DefaultValue = false,
+          HelpText = "Compile only non-entities")]
+        public bool Lite { get; set; }
+
         [HelpOption]
         public string GetUsage()
         {
@@ -71,7 +75,7 @@ namespace Pi.Editor
                 {
                     // generic cs
                     Console.WriteLine("Generate cs...");
-                    CsharpGenerator.Gen();
+                    CsharpGenerator.Gen(options.Lite);
 
                     // generic pb
                     Console.WriteLine("Generate protos...");
@@ -79,7 +83,7 @@ namespace Pi.Editor
 
                     // compile
                     Console.WriteLine("Compiling to Pi.Gen.dll...");
-                    Compiler.Compile();
+                    Compiler.Compile(options.Lite);
 
                     Console.WriteLine("Success, Press any key to exit!");
                     Console.ReadKey();

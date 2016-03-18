@@ -11,10 +11,14 @@ namespace Pi.Editor
         public static void Gen()
         {
             // 枚举
-            var enums = new EnumDef()
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.ProtosDefPath, "message.proto"),
+                "message MyProto{        optional string Message = \"\";  }");
+
+            // 枚举
+            var pid = new EnumDef()
             {
-                Comment = "枚举定义",
-                Name = "ESampleEnum",
+                Comment = "属性Id",
+                Name = "EPid",
                 Values = new List<string>()
                 {
                     "One",
@@ -22,8 +26,23 @@ namespace Pi.Editor
                     "Three",
                 }
             };
-            FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, enums.Name + ".json"),
-                JsonSerializer.Serialize(enums));
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, pid.Name + ".json"),
+                JsonSerializer.Serialize(pid));
+
+            // 枚举
+            var componentsId = new EnumDef()
+            {
+                Comment = "组件Id",
+                Name = "EComponentId",
+                Values = new List<string>()
+                {
+                    "One",
+                    "Two",
+                    "Three",
+                }
+            };
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, componentsId.Name + ".json"),
+                JsonSerializer.Serialize(componentsId));
 
             // 常量
             var consts = new ConstDef()
@@ -68,7 +87,7 @@ namespace Pi.Editor
                         PropertyId = "Three",
                         Type = "List",
                         ItemType = "string",
-                        DefaultValue = "new string[]{{\"1\", \"2\"}}",
+                        DefaultValue = "new string[]{\"1\", \"2\"}",
                     }
                 }
             };

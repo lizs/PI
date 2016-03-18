@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Pi.Editor
@@ -7,15 +8,18 @@ namespace Pi.Editor
     {
         public static void Gen()
         {
-            var files = new StringBuilder();
-            foreach (var file in FileSys.EnumerateFiles(Environment.Ins.DefRoot, "*.proto"))
-            {
-                files.AppendFormat(" -i:{0}", file);
-            }
+            var files = FileSys.EnumerateFiles(Environment.Ins.DefRoot, "*.proto").ToList();
+            if(files.Count == 0) return;
 
+            var filesLst = new StringBuilder();
+            foreach (var file in files)
+            {
+                filesLst.AppendFormat(" -i:{0}", file);
+            }
+            
             var args = string.Format(@"-o:{0} {1} -ns:Pi.Gen", Path.Combine(Environment.Ins.ScriptsPath, "Proto.cs"),
-                files);
-            CommandlineTool.Excecut("tool/ProtoGen.exe", args);
+                filesLst);
+            CommandlineTool.Excecut("ProtoGen/ProtoGen.exe", args);
         }
     }
 }

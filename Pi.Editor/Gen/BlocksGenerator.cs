@@ -84,6 +84,7 @@ namespace Pi.Editor
             var sb = new StringBuilder();
             var template = TemplateProvider.Ins.Get(EDefType.Block);
             var def = JsonSerializer.Deserialize<BlocksDef>(DefinitionPath);
+            BlockCache.Ins.Cache(def);
             
             var blocks = new StringBuilder();
             def.Blocks.ForEach(x =>
@@ -104,17 +105,17 @@ namespace Pi.Editor
                 switch (x.Type.ToUpper())
                 {
                     case "SETTABLE":
-                        block = string.Format("\t\tnew SettableBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
+                        block = string.Format("new SettableBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
                             mode);
                         break;
 
                     case "INCREASABLE":
-                        block = string.Format("\t\tnew IncreasableBlock<{0}>((short){1}, {2}, {3}, {4}, {5})", x.ItemType, pid, defaultValue,
+                        block = string.Format("new IncreasableBlock<{0}>((short){1}, {2}, {3}, {4}, {5})", x.ItemType, pid, defaultValue,
                             mode, min, max);
                         break;
 
                     case "LIST":
-                        block = string.Format("\t\tnew ListBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
+                        block = string.Format("new ListBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
                             mode);
                         break;
 
@@ -122,7 +123,7 @@ namespace Pi.Editor
                         throw new NotSupportedException();
                 }
 
-                blocks.AppendFormat("{{{0}, {1}}},\r\n", pid, block);
+                blocks.AppendFormat("\t\t\t\t{{{0}, {1}}},\r\n", pid, block);
             });
 
             sb.AppendFormat(template, def.Comment, blocks);

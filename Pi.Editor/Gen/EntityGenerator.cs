@@ -58,19 +58,26 @@ namespace Pi.Editor
             var template = TemplateProvider.Ins.Get(EDefType.Entity);
             var def = JsonSerializer.Deserialize<EntityDef>(DefinitionPath);
 
-            var properties = new StringBuilder();
-            def.Properties.ForEach(x => properties.AppendFormat("\t\tBlockMaker.Create(EPid.{0}),\r\n", x));
+            // inject block
+            var blocks = new StringBuilder();
+            def.Properties.ForEach(x => blocks.AppendFormat("\t\t\t\tBlockMaker.Create(EPid.{0}),\r\n", x));
 
+            // add component
             var components = new StringBuilder();
             def.Components.ForEach(x =>
             {
                 var type = Type.GetType(x, true, true);
-                components.AppendFormat("\t\tAddComponent<{0}>(),\r\n", type.FullName);
+                components.AppendFormat("\t\t\tAddComponent<{0}>();\r\n", type.FullName);
             });
 
-            sb.AppendFormat(template, def.Comment, def.Name, properties, components);
+            // property(get/set)
+            var properties = new StringBuilder();
+            def.Properties.ForEach(x => properties.AppendLine(BlockCache.Ins.Get(x)));
 
-            FileSys.WriteToFile(Path.Combine(Environment.Ins.ScriptsPath, def.Name + ".cs"), sb.ToString());
+
+            sb.AppendFormat(template, def.Comment, def.Name, blocks, components, properties);
+
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.EntityScriptsPath, def.Name + ".cs"), sb.ToString());
         }
     }
 }

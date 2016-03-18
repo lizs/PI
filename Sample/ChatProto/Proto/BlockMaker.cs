@@ -42,7 +42,7 @@ namespace Shared
 
             if (Blocks.ContainsKey(epid))
                 return Blocks[epid];
-
+            
             throw new NotImplementedException(epid.ToString());
         }
 
