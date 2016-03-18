@@ -7,6 +7,6 @@
     "Three"
   ],
   "Components": [
-    "Shared.SampleComponentBase, Shared",
+    "Shared.SampleComponentBase, Shared"
   ]
 }

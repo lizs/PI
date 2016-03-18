@@ -1,1 +1,4 @@
-message MyProto{        optional string Message = "";  }
+message MyProto
+{
+    optional string Message = 1;  
+}

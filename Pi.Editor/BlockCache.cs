@@ -24,8 +24,8 @@ namespace Pi.Editor
                 switch (x.Type.ToUpper())
                 {
                     case "SETTABLE":
-                        block = string.Format(
-@"      public {0} {1}
+                        block = string.Format(@"
+        public {0} {1}
         {{
             get {{ return Get<{0}>((short){2}); }}
             set {{ Set<{0}>((short){2}, value); }}
@@ -34,8 +34,8 @@ namespace Pi.Editor
                         break;
 
                     case "INCREASABLE":
-                        block = string.Format(
-@"      public {0} {1}
+                        block = string.Format(@"
+        public {0} {1}
         {{
             get {{ return Get<{0}>((short){2}); }}
             set {{ IncTo<{0}>((short){2}, value); }}
@@ -44,8 +44,8 @@ namespace Pi.Editor
                         break;
 
                     case "LIST":
-                        block = string.Format(
-@"      public List<{0}> {1}
+                        block = string.Format(@"
+        public List<{0}> {1}
         {{
             get {{ return GetList<{0}>((short){2}); }}
             set {{ RemoveAll((short){2}); AddRange<{0}>((short){2}, value); }}

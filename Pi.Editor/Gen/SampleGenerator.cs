@@ -12,7 +12,10 @@ namespace Pi.Editor
         {
             // 枚举
             FileSys.WriteToFile(Path.Combine(Environment.Ins.ProtosDefPath, "message.proto"),
-                "message MyProto{        optional string Message = \"\";  }");
+@"message MyProto
+{
+    optional string Message = 1;  
+}");
 
             // 枚举
             var pid = new EnumDef()
@@ -101,9 +104,7 @@ namespace Pi.Editor
                 Name = "MyEntity",
                 Components = new List<string>()
                 {
-                    "namespace.class1, assembly",
-                    "namespace.class2, assembly",
-                    "namespace.class3, assembly",
+                    "Shared.SampleComponentBase, Shared",
                 },
                 Properties = new List<string>()
                 {

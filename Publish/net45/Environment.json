@@ -1,7 +1,2 @@
 ﻿{
-  "TemplatesPath": "Templates",
-  "ScriptsPath": "Scripts",
-  "DllOutputPath": "Assembly",
-  "DefPath": "Definitions",
-  "ProtoPath": "Protos"
 }
