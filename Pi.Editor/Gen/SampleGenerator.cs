@@ -104,7 +104,9 @@ namespace Pi.Editor
                 Name = "MyEntity",
                 Components = new List<string>()
                 {
-                    "Shared.SampleComponentBase, Shared",
+                    "One",
+                    "Two",
+                    "Three",
                 },
                 Properties = new List<string>()
                 {

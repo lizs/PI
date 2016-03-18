@@ -6,10 +6,6 @@ namespace Pi.Editor
 {
     internal class Options
     {
-        [Option('a', "assembly", Required = false,
-          HelpText = "Components'assembly")]
-        public string ComponentsAssembly { get; set; }
-
         [Option('o', "output",
           HelpText = "Output assembly name")]
         public string OutputFileName { get; set; }
@@ -25,10 +21,6 @@ namespace Pi.Editor
         [Option('c', "compile", DefaultValue = false,
           HelpText = "Compile to generate assembly")]
         public bool Compile { get; set; }
-
-        [Option('l', "lite", DefaultValue = false,
-          HelpText = "Compile only non-entities")]
-        public bool Lite { get; set; }
 
         [HelpOption]
         public string GetUsage()
@@ -51,11 +43,6 @@ namespace Pi.Editor
 
             try
             {
-                if (!string.IsNullOrEmpty(options.ComponentsAssembly))
-                {
-                    Environment.Ins.ComponentsAssembly = options.ComponentsAssembly;
-                }
-
                 if (!string.IsNullOrEmpty(options.OutputFileName))
                 {
                     Environment.Ins.OutputFileName = options.OutputFileName;
@@ -75,7 +62,7 @@ namespace Pi.Editor
                 {
                     // generic cs
                     Console.WriteLine("Generate cs...");
-                    CsharpGenerator.Gen(options.Lite);
+                    CsharpGenerator.Gen();
 
                     // generic pb
                     Console.WriteLine("Generate protos...");
@@ -83,7 +70,7 @@ namespace Pi.Editor
 
                     // compile
                     Console.WriteLine("Compiling to Pi.Gen.dll...");
-                    Compiler.Compile(options.Lite);
+                    Compiler.Compile();
 
                     Console.WriteLine("Success, Press any key to exit!");
                     Console.ReadKey();

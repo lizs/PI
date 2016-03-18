@@ -64,11 +64,7 @@ namespace Pi.Editor
 
             // add component
             var components = new StringBuilder();
-            def.Components.ForEach(x =>
-            {
-                var type = Type.GetType(x, true, true);
-                components.AppendFormat("\t\t\tAddComponent<{0}>();\r\n", type.FullName);
-            });
+            def.Components.ForEach(x => components.AppendFormat("\t\t\tAddComponent((short)EComponentId.{0});\r\n", x));
 
             // property(get/set)
             var properties = new StringBuilder();
@@ -77,7 +73,7 @@ namespace Pi.Editor
 
             sb.AppendFormat(template, def.Comment, def.Name, blocks, components, properties);
 
-            FileSys.WriteToFile(Path.Combine(Environment.Ins.EntityScriptsPath, def.Name + ".cs"), sb.ToString());
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.ScriptsPath, def.Name + ".cs"), sb.ToString());
         }
     }
 }

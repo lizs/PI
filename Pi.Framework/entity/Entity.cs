@@ -220,6 +220,11 @@ namespace Pi.Framework
             return Components.AddComponent(cpType);
         }
 
+        public Component AddComponent(short cpId)
+        {
+            return Components.AddComponent(cpId);
+        }
+
         public List<short> RemoveComponent<T>() where T : Component
         {
             return Components.Destroy<T>();

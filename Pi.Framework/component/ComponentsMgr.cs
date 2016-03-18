@@ -29,6 +29,8 @@ namespace Pi.Framework
 {
     public class ComponentsMgr : UniqueMgr<short, Component>
     {
+        public Func<short, Type> ComponentTypeResolver { get; set; } 
+
         private void AddDependencies<T>() where T : Component, new()
         {
             AddDependencies(typeof(T));
@@ -77,6 +79,21 @@ namespace Pi.Framework
 
             AddDependencies(cpType);
             return CreateComponent(cpType);
+        }
+
+        /// <summary>
+        ///     通过Id添加组件
+        ///     注：此接口依赖ComponentTypeResolver，若其为空则会抛出异常
+        /// </summary>
+        /// <param name="cpid"></param>
+        /// <returns></returns>
+        public Component AddComponent(short cpid)
+        {
+            if(ComponentTypeResolver == null)
+                throw new Exception("ComponentTypeResolver is null!");
+
+            var type = ComponentTypeResolver(cpid);
+            return AddComponent(type);
         }
 
         public bool ExistComponent<T>() where T : Component

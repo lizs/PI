@@ -28,7 +28,9 @@ namespace Pi.Gen
             base.SpawnComponents();
 
 			// add components
-			AddComponent<Shared.SampleComponentBase>();
+			AddComponent((short)EComponentId.One);
+			AddComponent((short)EComponentId.Two);
+			AddComponent((short)EComponentId.Three);
 
         }
 

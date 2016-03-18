@@ -9,15 +9,10 @@ namespace Pi.Editor
         ///     生成cs代码
         /// </summary>
         /// <param name="lite">true:仅生成非Entity代码, false:全部生成</param>
-        public static void Gen(bool lite)
+        public static void Gen()
         {
             // scan definition jsons
             var jsons = FileSys.EnumerateFiles(Environment.Ins.DefRoot, "*.json");
-            if (lite)
-            {
-                var entityDir = FileSys.GetWorkingDirectory(Environment.Ins.EntitiesDefPath);
-                jsons = jsons.Where(x => FileSys.GetWorkingDirectory(x) != FileSys.GetWorkingDirectory(entityDir));
-            }
 
             // generate cs files
             Console.WriteLine("Scan definitions...");

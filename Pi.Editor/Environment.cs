@@ -32,7 +32,7 @@ namespace Pi.Editor
                 CreateDirectories(new[]
                 {
                     _ins.TemplatesPath, _ins.ScriptsPath, _ins.DllOutputPath, _ins.BlocksDefPath, _ins.ConstsDefPath,
-                    _ins.EnumsDefPath, _ins.EntitiesDefPath, _ins.ProtosDefPath, _ins.EntityScriptsPath
+                    _ins.EnumsDefPath, _ins.EntitiesDefPath, _ins.ProtosDefPath,
                 });
 
                 return _ins;
@@ -83,14 +83,6 @@ namespace Pi.Editor
         public string ScriptsPath
         {
             get { return _scriptsPath; }
-        }
-        
-        /// <summary>
-        ///     脚本根
-        /// </summary>
-        public string EntityScriptsPath
-        {
-            get { return string.Format("{0}/{1}", ScriptsPath, EDefType.Entity); }
         }
 
         /// <summary>
