@@ -1,31 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace Pi.Editor
 {
-//    public enum EPropertyType
-//    {
-//        Settable,
-//        Increasable,
-//        List,
-//    }
-
-//    public enum EPropertyMode
-//    {
-//        // 临时的
-//        Temporary = 0,
-//        // 需同步
-//        Synchronizable = 1,
-//        // 需存储
-//        Persistable = 2,
-//    }
-
     /// <summary>
     ///     属性配置
     /// </summary>
-    internal class PropertyDef
+    internal class BlockDef
     {
         private string _mode = "Synchronizable";
 
@@ -81,16 +65,16 @@ namespace Pi.Editor
     /// <summary>
     ///     属性生成定义
     /// </summary>
-    internal class BlockMakerDef
+    internal class BlocksDef
     {
         public string Comment { get; set; }
-        public List<PropertyDef> Blocks { get; set; }
+        public List<BlockDef> Blocks { get; set; }
     }
 
 
-    internal class BlockMakerGenerator : CodeGenerator
+    internal class BlocksGenerator : Generator
     {
-        public BlockMakerGenerator(string defPath)
+        public BlocksGenerator(string defPath)
             : base(defPath)
         {
         }
@@ -99,7 +83,7 @@ namespace Pi.Editor
         {
             var sb = new StringBuilder();
             var template = TemplateProvider.Ins.Get(EDefType.Block);
-            var def = JsonSerializer.Deserialize<BlockMakerDef>(DefinitionPath);
+            var def = JsonSerializer.Deserialize<BlocksDef>(DefinitionPath);
             
             var blocks = new StringBuilder();
             def.Blocks.ForEach(x =>
@@ -120,19 +104,22 @@ namespace Pi.Editor
                 switch (x.Type.ToUpper())
                 {
                     case "SETTABLE":
-                        block = string.Format("new SettableBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
+                        block = string.Format("\t\tnew SettableBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
                             mode);
                         break;
 
                     case "INCREASABLE":
-                        block = string.Format("new IncreasableBlock<{0}>((short){1}, {2}, {3}, {4}, {5})", x.ItemType, pid, defaultValue,
+                        block = string.Format("\t\tnew IncreasableBlock<{0}>((short){1}, {2}, {3}, {4}, {5})", x.ItemType, pid, defaultValue,
                             mode, min, max);
                         break;
 
                     case "LIST":
-                        block = string.Format("new ListBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
+                        block = string.Format("\t\tnew ListBlock<{0}>((short){1}, {2}, {3})", x.ItemType, pid, defaultValue,
                             mode);
                         break;
+
+                    default:
+                        throw new NotSupportedException();
                 }
 
                 blocks.AppendFormat("{{{0}, {1}}},\r\n", pid, block);

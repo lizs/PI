@@ -4,14 +4,17 @@ namespace Pi.Gen
     /// <summary>
     ///     {0}
     /// </summary>
-    public partial class {1} : Entity
+    public class {1} : Entity
     {{
         protected override void OnInit(ObjArg arg)
         {{
             base.OnInit(arg);
 
 			// inject blocks
+            Inject(new []
+            {
 {2}
+            });
         }}
       
         protected override void SpawnComponents()

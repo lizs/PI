@@ -27,7 +27,7 @@ namespace Pi.Editor
         public List<KeyValuePair<string, string>> Values { get; set; }
     }
 
-    internal class ConstGenerator : CodeGenerator
+    internal class ConstGenerator : Generator
     {
         public ConstGenerator(string defPath) : base(defPath)
         {

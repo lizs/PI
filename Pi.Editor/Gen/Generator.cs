@@ -4,10 +4,10 @@ namespace Pi.Editor
     /// <summary>
     ///     cs文件生成器
     /// </summary>
-    internal abstract class CodeGenerator
+    internal abstract class Generator
     {
         public string DefinitionPath { get; private set; }
-        protected CodeGenerator(string defPath)
+        protected Generator(string defPath)
         {
             DefinitionPath = defPath;
         }
@@ -15,9 +15,9 @@ namespace Pi.Editor
         public abstract void Gen();
     }
 
-    internal class CodeGeneratorFactory
+    internal class GeneratorFactory
     {
-        public static CodeGenerator Create(EDefType type, string defPath)
+        public static Generator Create(EDefType type, string defPath)
         {
             switch (type)
             {
@@ -28,7 +28,10 @@ namespace Pi.Editor
                     return new ConstGenerator(defPath);
 
                 case EDefType.Block:
-                    return new BlockMakerGenerator(defPath);
+                    return new BlocksGenerator(defPath);
+
+                case EDefType.Entity:
+                    return new EntityGenerator(defPath);
 
                 default:
                     return null;

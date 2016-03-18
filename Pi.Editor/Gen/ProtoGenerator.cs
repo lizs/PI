@@ -8,7 +8,7 @@ namespace Pi.Editor
         public static void Gen()
         {
             var files = new StringBuilder();
-            foreach (var file in FileSys.EnumerateFiles(Environment.Ins.DefPath, "*.proto"))
+            foreach (var file in FileSys.EnumerateFiles(Environment.Ins.DefRoot, "*.proto"))
             {
                 files.AppendFormat(" -i:{0}", file);
             }

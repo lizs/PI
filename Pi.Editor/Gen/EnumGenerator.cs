@@ -25,7 +25,7 @@ namespace Pi.Editor
     /// <summary>
     ///     枚举文件生成
     /// </summary>
-    internal class EnumGenerator : CodeGenerator
+    internal class EnumGenerator : Generator
     {
         public EnumGenerator(string defPath) : base(defPath)
         {

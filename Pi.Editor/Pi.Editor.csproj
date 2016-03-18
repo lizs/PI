@@ -33,6 +33,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Depedencies\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -40,23 +44,23 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeGenerator\CodeGenerator.cs" />
-    <Compile Include="CodeGenerator\ConstGenerator.cs" />
-    <Compile Include="CodeGenerator\CsharpGenerator.cs" />
+    <Compile Include="Gen\Generator.cs" />
+    <Compile Include="Gen\ConstGenerator.cs" />
+    <Compile Include="Gen\CsharpGenerator.cs" />
     <Compile Include="CommandlineTool.cs" />
-    <Compile Include="CodeGenerator\ProtoGenerator.cs" />
-    <Compile Include="Definition\EDefType.cs" />
-    <Compile Include="CodeGenerator\EnumGenerator.cs" />
-    <Compile Include="CodeGenerator\TemplateProvider.cs" />
-    <Compile Include="Compiler\Compiler.cs" />
-    <Compile Include="Definition\ComponentDef.cs" />
-    <Compile Include="Definition\EntityDef.cs" />
+    <Compile Include="Gen\ProtoGenerator.cs" />
+    <Compile Include="Gen\EDefType.cs" />
+    <Compile Include="Gen\EnumGenerator.cs" />
+    <Compile Include="Gen\TemplateProvider.cs" />
+    <Compile Include="Compiler.cs" />
+    <Compile Include="Gen\EntityGenerator.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="FileSys.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="CodeGenerator\BlockMakerGenerator.cs" />
+    <Compile Include="Gen\BlocksGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleGenerator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -65,6 +69,7 @@
     <None Include="Files\Templates\Block.template" />
     <None Include="Files\Templates\Entity.template" />
     <None Include="Files\Templates\Enum.template" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
