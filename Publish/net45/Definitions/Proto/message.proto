@@ -1,4 +1,0 @@
-message MyProto
-{
-    optional string Message = 1;  
-}

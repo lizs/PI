@@ -23,7 +23,7 @@
 //   * */
 #endregion
 using Pi.Framework;
-using Shared;
+using Pi.Gen;
 using socket4net;
 
 namespace Sample

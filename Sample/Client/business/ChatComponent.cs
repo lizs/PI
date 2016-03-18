@@ -23,12 +23,14 @@
 //   * */
 #endregion
 using System.Threading.Tasks;
-using Shared;
+using Pi.Framework;
 using socket4net;
+using Pi.Gen;
 
 namespace Sample
 {
-    public class SampleComponent : SampleComponentBase
+    [ComponentId((short)EComponentId.ChatComponent)]
+    public class SampleComponent : RpcComponent
     {
         /// <summary>
         ///     请求创建一个Ship
@@ -82,7 +84,7 @@ namespace Sample
         /// <param name="msg"></param>
         public void Broadcast(string msg)
         {
-            Push(0, GetAncestor<Player>().Id, (short)EOps.Broadcst, new BroadcastProto { Message = msg },
+            Push(0, GetAncestor<Player>().Id, (short)EOps.Broadcast, new BroadcastProto { Message = msg },
                 0, Id);
         }
 
@@ -99,7 +101,7 @@ namespace Sample
         {
             switch ((EOps)ops)
             {
-                case EOps.Broadcst:
+                case EOps.Broadcast:
                     {
                         var proto = PiSerializer.Deserialize<BroadcastProto>(data);
                         Logger.Ins.Info(proto.Message);

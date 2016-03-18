@@ -2,6 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartArguments>-c</StartArguments>
-    <StartWorkingDirectory>D:\Git\Pi\Publish\net45\</StartWorkingDirectory>
+    <StartWorkingDirectory>D:\Git\Pi\Editor\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

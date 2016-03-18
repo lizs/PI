@@ -29,8 +29,6 @@ namespace Pi.Framework
 {
     public class ComponentsMgr : UniqueMgr<short, Component>
     {
-        public Func<short, Type> ComponentTypeResolver { get; set; } 
-
         private void AddDependencies<T>() where T : Component, new()
         {
             AddDependencies(typeof(T));
@@ -49,7 +47,7 @@ namespace Pi.Framework
 
         private Component CreateComponent(Type cpType)
         {
-            var id = ComponentIdCache.Ins.Get(cpType);
+            var id = ComponentsCache.Get(cpType);
             if(Exist(id)) return Get(id);
 
             var cp = (Component)Create(cpType, new ComponentArg(this, id));
@@ -59,13 +57,13 @@ namespace Pi.Framework
 
         private T CreateComponent<T>() where T : Component, new()
         {
-            var id = ComponentIdCache.Ins.Get(typeof(T));
+            var id = ComponentsCache.Get(typeof(T));
             return Exist(id) ? Get<T>(id) : Create<T>(new ComponentArg(this, id));
         }
 
         public T AddComponent<T>() where T : Component, new()
         {
-            var id = ComponentIdCache.Ins.Get(typeof(T));
+            var id = ComponentsCache.Get(typeof(T));
             if (Exist(id)) return Get<T>(id);
 
             AddDependencies<T>();
@@ -74,7 +72,7 @@ namespace Pi.Framework
 
         public Component AddComponent(Type cpType)
         {
-            var id = ComponentIdCache.Ins.Get(cpType);
+            var id = ComponentsCache.Get(cpType);
             if (Exist(id)) return Get(id);
 
             AddDependencies(cpType);
@@ -89,10 +87,13 @@ namespace Pi.Framework
         /// <returns></returns>
         public Component AddComponent(short cpid)
         {
-            if(ComponentTypeResolver == null)
-                throw new Exception("ComponentTypeResolver is null!");
+            var type = ComponentsCache.Get(cpid);
+            if (type == null)
+            {
+                Logger.Ins.Error("Compoent of id {0} not exist!", cpid);
+                return null;
+            }
 
-            var type = ComponentTypeResolver(cpid);
             return AddComponent(type);
         }
 
@@ -103,7 +104,7 @@ namespace Pi.Framework
 
         public bool ExistComponent(Type cpType)
         {
-            var id = ComponentIdCache.Ins.Get(cpType);
+            var id = ComponentsCache.Get(cpType);
             return ExistComponent(id);
         }
 

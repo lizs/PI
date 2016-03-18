@@ -81,7 +81,8 @@
     <Compile Include="node\Watch.cs" />
     <Compile Include="reflection\AttributesCache.cs" />
     <Compile Include="reflection\ComponentDepedencyCache.cs" />
-    <Compile Include="reflection\ComponentIdCache.cs" />
+    <Compile Include="reflection\ComponentIdAttribute.cs" />
+    <Compile Include="reflection\ComponentsCache.cs" />
     <Compile Include="util\Numeric\Add.cs" />
     <Compile Include="util\Numeric\Compare.cs" />
     <Compile Include="util\Numeric\Equals.cs" />

@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Depedencies\Logger.dll</HintPath>
     </Reference>
+    <Reference Include="Pi.Gen">
+      <HintPath>..\..\Depedencies\Pi.Gen.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\..\Depedencies\protobuf-net.dll</HintPath>
     </Reference>
@@ -46,12 +49,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Depedencies\socket4net.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="business\ChatComponent.cs" />
+    <Compile Include="business\ModifierComponent.cs" />
     <Compile Include="business\SampleSession.cs" />
     <Compile Include="business\Player.cs" />
     <Compile Include="node\MyLauncher.cs" />
@@ -64,10 +67,6 @@
     <ProjectReference Include="..\..\Pi.Framework\Pi.Framework.csproj">
       <Project>{76c25de3-c35b-48c6-a7dd-039c89ee7453}</Project>
       <Name>Pi.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ChatProto\Shared.csproj">
-      <Project>{b4af3b64-7884-4864-b007-dd3b59a084d5}</Project>
-      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

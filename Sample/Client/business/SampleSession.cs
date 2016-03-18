@@ -24,8 +24,7 @@
 #endregion
 using System.Threading.Tasks;
 using Pi.Framework;
-using Shared;
-using socket4net;
+using Pi.Gen;
 
 namespace Sample
 {

@@ -23,7 +23,7 @@
 //   * */
 #endregion
 using Pi.Framework;
-using Shared;
+using Pi.Gen;
 using socket4net;
 
 namespace Sample
@@ -58,7 +58,7 @@ namespace Sample
         protected override void SpawnComponents()
         {
             base.SpawnComponents();
-            AddComponent<SampleComponent>();
+            AddComponent<ChatComponent>();
         }
     }
 }

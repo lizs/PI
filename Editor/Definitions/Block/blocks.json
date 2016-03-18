@@ -1,0 +1,28 @@
+{
+  "Comment": "属性定义",
+  "Blocks": [
+    {
+      "PropertyId": "One",
+      "Mode": "Synchronizable",
+      "Type": "Settable",
+      "ItemType": "int",
+      "DefaultValue": "0",
+    },
+    {
+      "PropertyId": "Two",
+      "Mode": "Synchronizable",
+      "Type": "Increasable",
+      "ItemType": "int",
+      "DefaultValue": "0",
+      "Max": "100",
+      "Min": "0"
+    },
+    {
+      "PropertyId": "Three",
+      "Mode": "Synchronizable",
+      "Type": "List",
+      "ItemType": "string",
+      "DefaultValue": "new string[]{\"1\", \"2\"}",
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Comment": "非玩家操作码",
+  "Name": "ENonPlayerOps",
+  "Values": [
+    {
+      "Key": "CreatePlayer",
+      "Value": "-1"
+    },
+  ]
+}

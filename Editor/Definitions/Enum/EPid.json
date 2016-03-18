@@ -1,0 +1,18 @@
+{
+  "Comment": "属性Id",
+  "Name": "EPid",
+  "Values": [
+    {
+      "Key": "One",
+      "Value": ""
+    },
+    {
+      "Key": "Two",
+      "Value": ""
+    },
+    {
+      "Key": "Three",
+      "Value": ""
+    },
+  ]
+}

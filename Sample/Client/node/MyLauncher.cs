@@ -23,7 +23,9 @@
 //   * */
 #endregion
 
+using System.Reflection;
 using Pi.Framework;
+using socket4net;
 
 namespace Sample
 {
@@ -33,6 +35,12 @@ namespace Sample
         {
             base.SpawnJobs();
             Jobs.Create<ChatNodesMgr>(new NodesMgrArg(this, Config), false);
+        }
+
+        protected override void OnInit(ObjArg arg)
+        {
+            base.OnInit(arg);
+            ComponentsCache.Cache(Assembly.GetAssembly(GetType()));
         }
     }
 }

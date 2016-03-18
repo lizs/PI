@@ -19,7 +19,7 @@ namespace Pi.Editor
         /// <summary>
         ///     枚举值
         /// </summary>
-        public List<string> Values { get; set; }
+        public List<KeyValuePair<string, string>> Values { get; set; }
     }
 
     /// <summary>
@@ -38,7 +38,13 @@ namespace Pi.Editor
             var enumDef = JsonSerializer.Deserialize<EnumDef>(DefinitionPath);
 
             var content = new StringBuilder();
-            enumDef.Values.ForEach(x => content.AppendLine(string.Format("\t\t{0},", x)));
+            enumDef.Values.ForEach(x =>
+            {
+                if(string.IsNullOrEmpty(x.Value))
+                    content.AppendLine(string.Format("\t\t{0},", x.Key));
+                else
+                    content.AppendLine(string.Format("\t\t{0} = {1},", x.Key, x.Value));
+            });
             sb.AppendFormat(template, enumDef.Comment, enumDef.Name, content);
 
             FileSys.WriteToFile(Path.Combine(Environment.Ins.ScriptsPath, enumDef.Name + ".cs"), sb.ToString());

@@ -22,11 +22,11 @@ namespace Pi.Editor
             {
                 Comment = "属性Id",
                 Name = "EPid",
-                Values = new List<string>()
+                Values = new List<KeyValuePair<string, string>>()
                 {
-                    "One",
-                    "Two",
-                    "Three",
+                    new KeyValuePair<string, string>("One", ""),
+                    new KeyValuePair<string, string>("Two", ""),
+                    new KeyValuePair<string, string>("Three", ""),
                 }
             };
             FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, pid.Name + ".json"),
@@ -37,11 +37,9 @@ namespace Pi.Editor
             {
                 Comment = "组件Id",
                 Name = "EComponentId",
-                Values = new List<string>()
+                Values = new List<KeyValuePair<string, string>>()
                 {
-                    "One",
-                    "Two",
-                    "Three",
+                    new KeyValuePair<string, string>("ChatComponent", ""),
                 }
             };
             FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, componentsId.Name + ".json"),

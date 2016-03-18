@@ -1,0 +1,14 @@
+{
+  "Comment": "组件Id",
+  "Name": "EComponentId",
+  "Values": [
+    {
+      "Key": "ChatComponent",
+      "Value": "1"
+    },
+    {
+      "Key": "ModifierComponent",
+      "Value": ""
+    },
+  ]
+}

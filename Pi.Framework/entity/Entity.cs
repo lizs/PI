@@ -82,6 +82,7 @@ namespace Pi.Framework
         /// </summary>
         protected virtual void SpawnComponents()
         {
+            AddComponent<PropertyComponent>();
         }
         
         #region ≥ı ºªØ°¢–∂‘ÿ

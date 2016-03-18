@@ -79,18 +79,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(SolutionDir)common_for_exe.props" />
-  <PropertyGroup>
-    <PostBuildEvent>
-      copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(PublishDir)"
-      copy "$(ProjectDir)$(OutDir)$(TargetFileName).config" "$(PublishDir)"
-      copy "$(ProjectDir)$(OutDir)$(TargetName).pdb" "$(PublishDir)"
-      xcopy "$(ProjectDir)/Files" "$(PublishDir)" /S /Y
-      
-      echo "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(PublishDir)"
-      echo "$(ProjectDir)$(OutDir)$(TargetFileName).config" "$(PublishDir)"
-      echo "$(ProjectDir)Files/*.*" "$(PublishDir)"
-      echo "$(ProjectDir)$(OutDir)$(TargetName).pdb" "$(PublishDir)"
-</PostBuildEvent>
-  </PropertyGroup>
+  <Import Project="$(SolutionDir)common_for_editor.props" />
 </Project>

@@ -1,0 +1,12 @@
+{
+  "Comment": "实体定义",
+  "Name": "Ship",
+  "Properties": [
+    "One",
+    "Two",
+    "Three"
+  ],
+  "Components": [
+    "ModifierComponent",
+  ]
+}
