@@ -42,8 +42,8 @@ namespace Pi.Editor
             var content = new StringBuilder();
             enumDef.Values.ForEach(x => content.AppendFormat(
                 enumDef.ValueType.ToUpper() == "STRING"
-                    ? "\t\tpublic const {0} {1} = \"{2}\";\r\n"
-                    : "\t\tpublic const {0} {1} = {2};\r\n", enumDef.ValueType, x.Key, x.Value));
+                    ? "        public const {0} {1} = \"{2}\";\r\n"
+                    : "{3}public const {0} {1} = {2};\r\n", enumDef.ValueType, x.Key, x.Value, Spaces8));
             sb.AppendFormat(template, enumDef.Comment, enumDef.ClassName, content);
 
             FileSys.WriteToFile(Path.Combine(Environment.Ins.ScriptsPath, enumDef.ClassName + ".cs"), sb.ToString());

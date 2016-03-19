@@ -27,9 +27,9 @@ namespace Pi.Gen
 
 		private static readonly Dictionary<EPid, IBlock> Blocks = new Dictionary<EPid, IBlock>()
         {
-				{EPid.One, new SettableBlock<int>((short)EPid.One, 0, EBlockMode.Synchronizable)},
-				{EPid.Two, new IncreasableBlock<int>((short)EPid.Two, 0, EBlockMode.Synchronizable, 0, 0)},
-				{EPid.Three, new ListBlock<string>((short)EPid.Three, new string[]{"1", "2"}, EBlockMode.Synchronizable)},
+            {EPid.One, new SettableBlock<int>((short)EPid.One, 0, EBlockMode.Synchronizable)},
+            {EPid.Two, new IncreasableBlock<int>((short)EPid.Two, 0, EBlockMode.Synchronizable, 0, 0)},
+            {EPid.Three, new ListBlock<string>((short)EPid.Three, new string[]{"1", "2"}, EBlockMode.Synchronizable)},
 
         }; 
     }

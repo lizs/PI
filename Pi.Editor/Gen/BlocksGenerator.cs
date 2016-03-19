@@ -123,7 +123,7 @@ namespace Pi.Editor
                         throw new NotSupportedException();
                 }
 
-                blocks.AppendFormat("\t\t\t\t{{{0}, {1}}},\r\n", pid, block);
+                blocks.AppendFormat("{0}{{{1}, {2}}},\r\n", Spaces12, pid, block);
             });
 
             sb.AppendFormat(template, def.Comment, blocks);

@@ -6,7 +6,7 @@ namespace Pi.Gen
     /// </summary>
     public enum ENonPlayerOps
     {
-		CreatePlayer = -1,
+        CreatePlayer = -1,
 
     }
 }

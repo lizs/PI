@@ -6,6 +6,11 @@ namespace Pi.Editor
     /// </summary>
     internal abstract class Generator
     {
+        public const string Spaces8 = "        ";
+        public const string Spaces4 = "    ";
+        public const string Spaces6 = "      ";
+        public const string Spaces12 = "            ";
+        public const string Spaces16 = "                ";
         public string DefinitionPath { get; private set; }
         protected Generator(string defPath)
         {

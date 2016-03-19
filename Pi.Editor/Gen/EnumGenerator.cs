@@ -41,9 +41,9 @@ namespace Pi.Editor
             enumDef.Values.ForEach(x =>
             {
                 if(string.IsNullOrEmpty(x.Value))
-                    content.AppendLine(string.Format("\t\t{0},", x.Key));
+                    content.AppendLine(string.Format("{1}{0},", x.Key, Spaces8));
                 else
-                    content.AppendLine(string.Format("\t\t{0} = {1},", x.Key, x.Value));
+                    content.AppendLine(string.Format("{2}{0} = {1},", x.Key, x.Value, Spaces8));
             });
             sb.AppendFormat(template, enumDef.Comment, enumDef.Name, content);
 

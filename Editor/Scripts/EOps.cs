@@ -6,10 +6,10 @@ namespace Pi.Gen
     /// </summary>
     public enum EOps
     {
-		Echo,
-		Broadcast,
-		Create,
-		Destroy,
+        Echo,
+        Broadcast,
+        Create,
+        Destroy,
 
     }
 }

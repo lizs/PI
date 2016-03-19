@@ -6,9 +6,9 @@ namespace Pi.Gen
     /// </summary>
     public enum EPid
     {
-		One,
-		Two,
-		Three,
+        One,
+        Two,
+        Three,
 
     }
 }

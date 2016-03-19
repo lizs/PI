@@ -16,9 +16,9 @@ namespace Pi.Gen
 			// inject blocks
             Inject(new []
             {
-				BlockMaker.Create(EPid.One),
-				BlockMaker.Create(EPid.Two),
-				BlockMaker.Create(EPid.Three),
+                BlockMaker.Create(EPid.One),
+                BlockMaker.Create(EPid.Two),
+                BlockMaker.Create(EPid.Three),
 
             });
         }
@@ -28,7 +28,7 @@ namespace Pi.Gen
             base.SpawnComponents();
 
 			// add components
-			AddComponent((short)EComponentId.ModifierComponent);
+            AddComponent((short)EComponentId.ModifierComponent);
 
         }
 

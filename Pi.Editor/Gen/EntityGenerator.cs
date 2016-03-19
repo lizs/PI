@@ -60,11 +60,12 @@ namespace Pi.Editor
 
             // inject block
             var blocks = new StringBuilder();
-            def.Properties.ForEach(x => blocks.AppendFormat("\t\t\t\tBlockMaker.Create(EPid.{0}),\r\n", x));
+            def.Properties.ForEach(x => blocks.AppendFormat("{1}BlockMaker.Create(EPid.{0}),\r\n", x, Spaces16));
 
             // add component
             var components = new StringBuilder();
-            def.Components.ForEach(x => components.AppendFormat("\t\t\tAddComponent((short)EComponentId.{0});\r\n", x));
+            def.Components.ForEach(
+                x => components.AppendFormat("{1}AddComponent((short)EComponentId.{0});\r\n", x, Spaces12));
 
             // property(get/set)
             var properties = new StringBuilder();
