@@ -38,29 +38,11 @@ namespace Pi.Framework
         }
     }
 
-    public enum EMsg
-    {
-        // 网络消息皆为异步消息
-        NetPush,
-        NetReq,
-
-        LogicPush,
-        LogicReq,
-        LogicPushAsync,
-        LogicReqAsync,
-    }
-
     /// <summary>
     ///     组件消息通知基类
     /// </summary>
     public class Message
     {
-        public Message(EMsg type)
-        {
-            Type = type;
-        }
-
-        public EMsg Type { get; private set; }
     }
     
     public interface IEntity : IUniqueObj<long>, IProperty

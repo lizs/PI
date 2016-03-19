@@ -117,19 +117,17 @@ namespace Pi.Framework
 
             foreach (var cfg in Config.Servers)
             {
-                Create(cfg.NodeClass ?? typeof(ServerNode<>).MakeGenericType(new[] { MapSession(cfg.Type) }),
+                Create(cfg.NodeClass ?? typeof(ServerNode<>).MakeGenericType(new[] { Type.GetType(cfg.Type) }),
                     new NodeArg(this, cfg.Guid, cfg), false);
             }
 
             foreach (var cfg in Config.Clients)
             {
-                Create(cfg.NodeClass ?? typeof(ClientNode<>).MakeGenericType(new[] { MapSession(cfg.Type) }),
+                Create(cfg.NodeClass ?? typeof(ClientNode<>).MakeGenericType(new[] { Type.GetType(cfg.Type) }),
                     new NodeArg(this, cfg.Guid, cfg), false);
             }
 
             return true;
         }
-
-        protected abstract Type MapSession(string type);
     }
 }

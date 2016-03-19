@@ -37,16 +37,5 @@ namespace Sample
 
         private static ChatNodesMgr _ins;
         public static ChatNodesMgr Ins { get { return _ins; } }
-
-        protected override Type MapSession(string type)
-        {
-            switch (type.ToUpper())
-            {
-                case "SAMPLE":
-                    return typeof (SampleSession);
-            }
-
-            throw new ArgumentException("type");
-        }
     }
 }

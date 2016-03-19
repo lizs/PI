@@ -37,16 +37,5 @@ namespace Sample
 
         private static ServerNodesMgr _ins;
         public static ServerNodesMgr Ins { get { return _ins; } }
-
-        protected override Type MapSession(string type)
-        {
-            switch (type.ToUpper())
-            {
-                case "SAMPLE":
-                    return typeof (DispatchableSession);
-            }
-
-            throw new ArgumentException("type");
-        }
     }
 }
