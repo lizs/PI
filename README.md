@@ -1,7 +1,5 @@
-C# 分布式游戏服务框架（基于socket4net）
-socket4net链接：https://github.com/lizs/Socket4Net
+#C# game server framework(based on [socket4net](https://github.com/lizs/Socket4Net))
 
-参考Sample：Server/Client
-
-点击链接加入群【Socket4Net】：http://jq.qq.com/?_wv=1027&k=VptNja
+####Question
+QQ group：[Click to join](http://jq.qq.com/?_wv=1027&k=VptNja)<br>
 e-mail : lizs4ever@163.com
