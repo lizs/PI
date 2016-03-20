@@ -23,13 +23,16 @@
 //   * */
 #endregion
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using socket4net;
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
     public class AsyncRedisClient : RedisClient, IAsyncRedisClient
     {
+#if NET45
         #region hash set
         public async Task<bool> HashMultiDelAsync(string hashid, List<string> feilds)
         {
@@ -138,5 +141,6 @@ namespace Pi.Framework
         {
             return await TaskHelper.ExcuteAsync(hashid, Exist);
         }
+#endif
     }
 }

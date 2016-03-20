@@ -25,8 +25,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using socket4net;
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
@@ -43,7 +45,8 @@ namespace Pi.Framework
         {
             get { return _es ?? (_es = GetAncestor<Player>().Es); }
         }
-
+        
+#if NET45
         public override Task<bool> OnPush(short ops, byte[] data)
         {
             switch ((ESyncOps) ops)
@@ -74,5 +77,6 @@ namespace Pi.Framework
 
             return Task.FromResult(false);
         }
+#endif
     }
 }

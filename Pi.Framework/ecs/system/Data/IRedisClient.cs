@@ -24,9 +24,11 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using ProtoBuf;
 using socket4net;
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
@@ -54,7 +56,7 @@ namespace Pi.Framework
     {
         public Type Type { get; set; }
         public long Id { get; set; }
-        public IReadOnlyCollection<RedisEntry> Blocks { get; set; }
+        public IEnumerable<RedisEntry> Blocks { get; set; }
     }
 
 
@@ -80,6 +82,7 @@ namespace Pi.Framework
 
     public interface IAsyncRedisClient : IRedisClient
     {
+#if NET45
         Task<bool> HashMultiDelAsync(string key, List<string> feilds);
         Task<byte[][]> HashGetAllAsync(string key);
         Task<byte[][]> HashMultiGetAsync(string key, List<string> feilds);
@@ -99,5 +102,6 @@ namespace Pi.Framework
         Task<bool> SetAsync(string key, string value);
         Task<bool> SetAsync(string key, byte[] value);
         Task<bool> ExistAsync(string key);
+#endif
     }
 }

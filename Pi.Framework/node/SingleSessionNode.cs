@@ -23,29 +23,30 @@
 //   * */
 #endregion
 using System;
-using System.Threading.Tasks;
 using socket4net;
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
     public interface ISingleSessionNode : INode
     {
         DispatchableSession Session { get; }
-
+        
+#if NET45
         Task<NetResult> RequestAsync(byte targetNode, long playerId, short ops, byte[] data,
             long objId, short componentId);
+        Task<NetResult> RequestAsync<T>(byte targetNode, long playerId, short ops, T proto,
+            long objId, short componentId);
+#endif
 
+        void RequestAsync<T>(byte targetNode, long playerId, short ops, T proto, long objId,
+            short componentId, Action<bool, byte[]> cb);
         void RequestAsync(byte targetNode, long playerId, short ops, byte[] data, long objId,
             short componentId, Action<bool, byte[]> cb);
 
         bool Push(byte targetNode, long playerId, short ops, byte[] data, long objId, short componentId);
-
-        Task<NetResult> RequestAsync<T>(byte targetNode, long playerId, short ops, T proto,
-            long objId, short componentId);
-
-        void RequestAsync<T>(byte targetNode, long playerId, short ops, T proto, long objId,
-            short componentId, Action<bool, byte[]> cb);
-
         bool Push<T>(byte targetNode, long playerId, short ops, T proto, long objId, short componentId);
     }
 
@@ -63,13 +64,25 @@ namespace Pi.Framework
         }
 
         #region 远端
-
+        
+#if NET45
         public async Task<NetResult> RequestAsync(byte targetNode, long playerId, short ops, byte[] data,
             long objId, short componentId)
         {
             if (Session == null) return NetResult.Failure;
             return await Session.RequestAsync(targetNode, playerId, ops, data, objId, componentId);
         }
+
+        public async Task<NetResult> RequestAsync<T>(byte targetNode, long playerId, short ops, T proto,
+            long objId, short componentId)
+        {
+            if (Session == null) return NetResult.Failure;
+            return
+                await
+                    Session.RequestAsync(targetNode, playerId, ops, PiSerializer.Serialize(proto), objId,
+                        componentId);
+        }
+#endif
 
         public void RequestAsync(byte targetNode, long playerId, short ops, byte[] data, long objId,
             short componentId, Action<bool, byte[]> cb)
@@ -88,16 +101,6 @@ namespace Pi.Framework
             if (Session == null) return false;
             Session.Push(targetNode, playerId, ops, data, objId, componentId);
             return true;
-        }
-
-        public async Task<NetResult> RequestAsync<T>(byte targetNode, long playerId, short ops, T proto,
-            long objId, short componentId)
-        {
-            if (Session == null) return NetResult.Failure;
-            return
-                await
-                    Session.RequestAsync(targetNode, playerId, ops, PiSerializer.Serialize(proto), objId,
-                        componentId);
         }
 
         public void RequestAsync<T>(byte targetNode, long playerId, short ops, T proto, long objId,
