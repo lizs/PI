@@ -49,9 +49,9 @@ Temporary Items
 bin/
 obj/
 packages/
+log/
 Publish/ChatC
 Publish/ChatS
-*.txt
 *.vsp
 *.psess
 Publish/*.vshost.exe
