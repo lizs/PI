@@ -1,8 +1,3 @@
-message EchoProto
-{
-    optional string Message = 1;  
-}
-
 message BroadcastProto
 {
     optional string Message = 1;  

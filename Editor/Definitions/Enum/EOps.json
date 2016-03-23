@@ -1,15 +1,7 @@
 {
-  "Comment": "操作码",
+  "Comment": "玩家操作码",
   "Name": "EOps",
   "Values": [
-    {
-      "Key": "Echo",
-      "Value": ""
-    },
-    {
-      "Key": "Broadcast",
-      "Value": ""
-    },
     {
       "Key": "Create",
       "Value": ""
@@ -18,5 +10,13 @@
       "Key": "Destroy",
       "Value": ""
     },
+    {
+      "Key": "Echo",
+      "Value": ""
+    },
+    {
+      "Key": "Broadcast",
+      "Value": ""
+    }
   ]
 }

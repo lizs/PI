@@ -23,7 +23,6 @@
 //   * */
 #endregion
 using System;
-using CustomLog;
 using Pi.Framework;
 using socket4net;
 
@@ -37,8 +36,7 @@ namespace Sample
             var launcherCfg = LauncherConfig.LoadAs<ServerConfig>("Server.exe.config");
 
             // 创建并启动Launcher
-            var arg = new LauncherArg<ServerConfig>(launcherCfg, new Log4Net(launcherCfg.LogConfig.File, "Server"));
-            Obj.New<MyLauncher>(arg, true);
+            Obj.New<MyLauncher>(new LauncherArg<ServerConfig>(launcherCfg, null), true);
             
             Console.WriteLine("Press any key to exit!");
             Console.ReadKey();

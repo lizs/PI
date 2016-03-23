@@ -2,14 +2,14 @@
 namespace Pi.Gen
 {
     /// <summary>
-    ///     操作码
+    ///     玩家操作码
     /// </summary>
     public enum EOps
     {
-        Echo,
-        Broadcast,
         Create,
         Destroy,
+        Echo,
+        Broadcast,
 
     }
 }

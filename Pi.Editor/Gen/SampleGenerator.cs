@@ -10,9 +10,14 @@ namespace Pi.Editor
     {
         public static void Gen()
         {
-            // 枚举
-            FileSys.WriteToFile(Path.Combine(Environment.Ins.ProtosDefPath, "message.proto"),
-@"message MyProto
+            // google protobuf message
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.ProtosDefPath, "echo.proto"),
+@"message EchoProto
+{
+    optional string Message = 1;  
+}");
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.ProtosDefPath, "broadcast.proto"),
+@"message BroadcastProto
 {
     optional string Message = 1;  
 }");
@@ -39,17 +44,48 @@ namespace Pi.Editor
                 Name = "EComponentId",
                 Values = new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("ChatComponent", ""),
+                    new KeyValuePair<string, string>("SampleComponent", "1"),
+                    new KeyValuePair<string, string>("ModifierComponent", "2"),
                 }
             };
             FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, componentsId.Name + ".json"),
                 JsonSerializer.Serialize(componentsId));
+            
+            // ops
+            var ops = new EnumDef()
+            {
+                Comment = "玩家操作码",
+                Name = "EOps",
+                Values = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("Create", ""),
+                    new KeyValuePair<string, string>("Destroy", ""),
+                    new KeyValuePair<string, string>("Echo", ""),
+                    new KeyValuePair<string, string>("Broadcast", ""),
+                }
+            };
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, ops.Name + ".json"),
+                JsonSerializer.Serialize(ops));
+
+
+            // non-player ops
+            var nonPlayerOps = new EnumDef()
+            {
+                Comment = "非玩家操作码",
+                Name = "ENonPlayerOps",
+                Values = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("CreatePlayer", "-1"),
+                }
+            };
+            FileSys.WriteToFile(Path.Combine(Environment.Ins.EnumsDefPath, nonPlayerOps.Name + ".json"),
+                JsonSerializer.Serialize(nonPlayerOps));
 
             // 常量
             var consts = new ConstDef()
             {
                 Comment = "Int32常量定义",
-                ClassName = "IntConsts",
+                ClassName = "Ints",
                 ValueType = "int",
                 Values = new List<KeyValuePair<string, string>>()
                 {
@@ -99,12 +135,10 @@ namespace Pi.Editor
             var entity = new EntityDef()
             {
                 Comment = "实体定义",
-                Name = "MyEntity",
+                Name = "Ship",
                 Components = new List<string>()
                 {
-                    "One",
-                    "Two",
-                    "Three",
+                    "ModifierComponent",
                 },
                 Properties = new List<string>()
                 {

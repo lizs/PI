@@ -6,8 +6,8 @@ namespace Pi.Gen
     /// </summary>
     public enum EComponentId
     {
-        ChatComponent = 1,
-        ModifierComponent,
+        SampleComponent = 1,
+        ModifierComponent = 2,
 
     }
 }

@@ -1,0 +1,629 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pi.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:Pi.Framework.Component">
+            <summary>
+                组件
+                游戏逻辑拆分以组件为单元
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Component.GetComponent``1">
+            <summary>
+                获取兄弟组件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.Component.GetComponent``1(System.Int16)">
+            <summary>
+                获取兄弟组件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cpId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.Component.OnStart">
+            <summary>
+                启动
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Component.OnDestroy">
+            <summary>
+                卸载
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Component.OnSubscribe">
+            <summary>
+                订阅
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Component.OnUnsubscribe">
+            <summary>
+                反订阅
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Component.OnMessage(Pi.Framework.Message)">
+            <summary>
+                处理消息
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="P:Pi.Framework.Component.Host">
+            <summary>
+                实体爹
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.ComponentsMgr.AddComponent(System.Int16)">
+            <summary>
+                通过Id添加组件
+                注：此接口依赖ComponentTypeResolver，若其为空则会抛出异常
+            </summary>
+            <param name="cpid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Pi.Framework.PropertyComponent">
+            <summary>
+                内置属性组件
+            </summary>
+        </member>
+        <member name="F:Pi.Framework.PropertyComponent._propertyBody">
+            <summary>
+                属性体
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.PropertyComponent.GetBlock(System.Int16)">
+            <summary>
+                获取属性块
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.PropertyComponent.Inject(System.Collections.Generic.IEnumerable{Pi.Framework.IBlock})">
+            <summary>
+                注入属性
+            </summary>
+            <param name="blocks"></param>
+        </member>
+        <member name="F:Pi.Framework.PropertyComponent.Listeners">
+            <summary>
+                监听本对象的某些属性改变
+            </summary>
+        </member>
+        <member name="F:Pi.Framework.PropertyComponent.GreedyListeners">
+            <summary>
+                监听本对象的任何属性改变
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.PropertyComponent.NotifyPropertyChanged(Pi.Framework.IBlock)">
+            <summary>
+                通知属性修改
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="M:Pi.Framework.PropertyComponent.OnPropertyChanged(Pi.Framework.IBlock)">
+            <summary>
+                通知属性改变
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="P:Pi.Framework.PropertyComponent.Blocks">
+            <summary>
+                枚举属性块
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.Message">
+            <summary>
+                组件消息通知基类
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.Entity">
+            <summary>
+               E(ECS)
+            </summary>
+            <summary>
+                E(ECS)
+                数据操作
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Entity.SpawnComponents">
+            <summary>
+                创建组件
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Entity.OnInit(socket4net.ObjArg)">
+            <summary>
+                初始化
+            </summary>
+            <param name="arg"></param>
+        </member>
+        <member name="M:Pi.Framework.Entity.OnStart">
+            <summary>
+                启动
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Entity.OnBorn">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Entity.OnDestroy">
+            <summary>
+                卸载
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Entity.Apply(System.Collections.Generic.IEnumerable{socket4net.Pair{System.Int16,System.Byte[]}})">
+            <summary>
+                应用属性
+            </summary>
+            <param name="properties"></param>
+        </member>
+        <member name="M:Pi.Framework.IBlock.Is``1">
+            <summary>
+                Obj是否为T类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.IBlock.Is(System.Type)">
+            <summary>
+                Obj是否为type类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.IBlock.As``1">
+            <summary>
+                将Value强转成T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.IBlock.AsList``1">
+            <summary>
+                将Value强转成List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.IBlock.SetMode(Pi.Framework.EBlockMode)">
+            <summary>
+                设置是否可序列化（需要存储Redis）
+            </summary>
+            <param name="mode"></param>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Id">
+            <summary>
+                属性Id
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Value">
+            <summary>
+                当前值
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Type">
+            <summary>
+                值类型
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.EBlockType">
+            <summary>
+                Block分类
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Dirty">
+            <summary>
+                是否涂改过
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Ops">
+            <summary>
+                最近一次涂改的操作
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.IBlock.Mode">
+            <summary>
+                模式
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.Block.Persistable">
+            <summary>
+                是否需即时存储
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.Block.Synchronizable">
+            <summary>
+                是否需同步
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ITrackableBlock`1">
+            <summary>
+                存储旧值的block
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:Pi.Framework.ITrackableBlock`1.PreviousValue">
+            <summary>
+                旧值
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ISettableBlock`1">
+            <summary>
+                可重新设值的属性块
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IIncreasableBlock`1">
+            <summary>
+                可增减值的属性块
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IListBlock`1">
+            <summary>
+                列表块
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:Pi.Framework.IncreasableBlock`1.PreviousValue">
+            <summary>
+                旧值
+            </summary>
+        </member>
+        <member name="F:Pi.Framework.ListBlock`1._opsStack">
+            <summary>
+                操作栈，有序记录Push之前的所有列表操作
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.ListBlock`1.SerializeDifference">
+            <summary>
+                列表差分序列化
+            </summary>zx
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.ListBlock`1.DeserializeDifference(System.Byte[])">
+            <summary>
+                列表差分反序列化
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Pi.Framework.ListItemRepresentation`1">
+            <summary>
+                封装一个Item
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.ListItemRepresentation`1.Id">
+            <summary>
+                分配给Item的Id
+                在当前Block唯一
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.ListItemRepresentation`1.Item">
+            <summary>
+                目标Item
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.RemoveOpsProto">
+            <summary>
+                移除单个
+                按照Id移除
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.RemoveOpsProto.Id">
+            <summary>
+                要移除的Id
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.InsertOpsProto`1">
+            <summary>
+                插入
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.UpdateOpsProto`1">
+            <summary>
+                更新
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ListOpsProto`1">
+            <summary>
+                列表操作协议
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Pi.Framework.ListOpsRepresentation.Id">
+            <summary>
+                操作目标Id
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.SettableBlock`1.Set(System.Object)">
+            <summary>
+            暴露settter
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Pi.Framework.SettableBlock`1.Set(`0)">
+            <summary>
+            暴露settter
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="P:Pi.Framework.SettableBlock`1.PreviousValue">
+            <summary>
+                旧值
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.DataSys">
+            <summary>
+                数据系统
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.RedisEntry">
+            <summary>
+                对接Redis hashid-value
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.EntityEntry">
+            <summary>
+                实体信息
+                一个实体由 类型、Id、属性定义
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.PersistSys">
+            <summary>
+                存储系统
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.PersistSys.PersistAsync(Pi.Framework.IAsyncRedisClient)">
+            <summary>
+                存储
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.SyncSys">
+                同步系统
+                即时批量同步
+                注：同步实体数据到对端，亦即对端实体数据是本端实体系统的完全克隆
+        </member>
+        <member name="M:Pi.Framework.SyncSys.Sync(Pi.Framework.DispatchableSession)">
+            <summary>
+                在指定会话中同步实体数据
+            </summary>
+            <param name="session"></param>
+        </member>
+        <member name="M:Pi.Framework.SyncSys.Sync(System.Collections.Generic.IEnumerable{Pi.Framework.DispatchableSession})">
+            <summary>
+                在指定会话中同步实体数据
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.EntitySysArg">
+            <summary>
+                实体管理器参数
+                包括：
+                1、 属性块创建器
+                2、 属性Feild格式化器
+                3、 属性Feild萃取器
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.EntitySys">
+            <summary>
+                实体管理器
+                包括：
+                1、 属性块创建器
+                2、 属性Feild格式化器
+                3、 属性Feild萃取器
+            
+                4、 属性发布器
+            
+                5、 实体同步
+                6、 实体存取
+            </summary>
+            <summary>
+                全局属性发布
+                注： 用于监听类型属性、全局属性改变
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.FormatEntity(Pi.Framework.Entity)">
+            <summary>
+                格式化输出一个实体
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.FormatBlock(System.Int64,Pi.Framework.IBlock)">
+            <summary>
+                格式化输出一个属性块
+            </summary>
+            <param name="id"></param>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Pi.Framework.EntitySys._globalListenrs">
+            <summary>
+                全局监听者，即：监听任何类型的任何属性改变
+            </summary>
+        </member>
+        <member name="F:Pi.Framework.EntitySys._globalTypeListeners">
+            <summary>
+                全局类型监听者，即：监听某类型的任何属性改变
+            </summary>
+        </member>
+        <member name="F:Pi.Framework.EntitySys._typeListeners">
+            <summary> 
+                类型监听， 即：监听某个类型的某些属性改变
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.Publish(Pi.Framework.Entity,Pi.Framework.IBlock)">
+            <summary>
+                Property中Notify时必须调用该接口
+            </summary>
+            <param name="host"></param>
+            <param name="block"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.Publish(System.Type,Pi.Framework.Entity,Pi.Framework.IBlock)">
+            <summary>
+                递归发布类型属性改变
+            </summary>
+            <param name="type"></param>
+            <param name="host"></param>
+            <param name="block"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.GlobalListen(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock})">
+            <summary>
+                监听全局属性
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.GlobalUnlisten(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock})">
+            <summary>
+                取消监听全局属性
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.GlobalListen``1(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock})">
+            <summary>
+                监听某类型对象的任何属性修改
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.GlobalUnlisten``1(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock})">
+            <summary>
+                取消监听某类型对象的任何属性修改
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.Listen``1(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock},System.Int16[])">
+            <summary>
+                监听类型属性
+            </summary>
+            <param name="handler"></param>
+            <param name="pids"></param>
+        </member>
+        <member name="M:Pi.Framework.EntitySys.Unlisten``1(System.Action{Pi.Framework.Entity,Pi.Framework.IBlock},System.Int16[])">
+            <summary>
+                取消监听类型
+            </summary>
+            <param name="handler"></param>
+            <param name="pids"></param>
+        </member>
+        <member name="T:Pi.Framework.SingleSessionNode`1">
+            <summary>
+                单会话节点
+                即：始终仅维护一条会话的节点，一般以客户端居多
+                如：Connector2GateClient
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.Node">
+            <summary>
+                节点
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.Node.GetConfig``1">
+            <summary>
+                获取配置
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.Node.GetSession``1">
+            <summary>
+                获取会话集
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pi.Framework.Node.Name">
+            <summary>
+                名
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.Node.Type">
+            <summary>
+                节点类型
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.Node.Peer">
+            <summary>
+                Peer
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.Node.Config">
+            <summary>
+                配置
+            </summary>
+        </member>
+        <member name="E:Pi.Framework.ClientNode`1.Watch">
+            <summary>
+                节点watch事件
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ConfigElementCollection`1">
+            <summary>
+                配置节点集合
+            </summary>
+            <typeparam name="TElement"></typeparam>
+        </member>
+        <member name="M:Pi.Framework.LauncherConfig.LoadAs``1(System.String,System.String)">
+            <summary>
+                加载App.Config
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="path"></param>
+            <param name="nodeCfgName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pi.Framework.NodeElement.Guid">
+            <summary>
+                唯一Id
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.NodeElement.Type">
+            <summary>
+                节点类型
+            </summary>
+        </member>
+        <!-- 对于成员“P:Pi.Framework.NodeElement.NodeClass”忽略有格式错误的 XML 注释 -->
+        <member name="P:Pi.Framework.NodeElement.Ip">
+            <summary>
+                ip
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.NodeElement.Port">
+            <summary>
+                端口
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.ServerNodeElement.ProxyIp">
+            <summary>
+                代理Ip
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.NodesMgr">
+            <summary>
+                节点管理器
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ServerNode`1">
+            <summary>
+                服务器节点
+            </summary>
+            <typeparam name="TSession"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.ComponentsCache">
+            <summary>
+                获取所有 组件ID=》组件 的映射关系
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.Player">
+            <summary>
+                玩家
+                挂载系统如下：
+                1、 实体系统
+                2、 同步系统
+                3、 存储系统
+            </summary>
+        </member>
+    </members>
+</doc>

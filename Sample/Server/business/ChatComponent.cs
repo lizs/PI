@@ -29,7 +29,7 @@ using socket4net;
 
 namespace Sample
 {
-    [ComponentId((short)EComponentId.ChatComponent)]
+    [ComponentId((short)EComponentId.SampleComponent)]
     public class ChatComponent : RpcComponent
     {
         public async override Task<NetResult> OnRequest(short ops, byte[] data)

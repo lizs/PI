@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: Definitions/Proto/message.proto
+// Generated from: Definitions/Proto/broadcast.proto
 namespace Pi.Gen
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EchoProto")]
-  public partial class EchoProto : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BroadcastProto")]
+  public partial class BroadcastProto : global::ProtoBuf.IExtensible
   {
-    public EchoProto() {}
+    public BroadcastProto() {}
     
 
     private string _Message = "";
@@ -29,10 +29,14 @@ namespace Pi.Gen
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BroadcastProto")]
-  public partial class BroadcastProto : global::ProtoBuf.IExtensible
+}
+// Generated from: Definitions/Proto/echo.proto
+namespace Pi.Gen
+{
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EchoProto")]
+  public partial class EchoProto : global::ProtoBuf.IExtensible
   {
-    public BroadcastProto() {}
+    public EchoProto() {}
     
 
     private string _Message = "";

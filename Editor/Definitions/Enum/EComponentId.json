@@ -3,12 +3,12 @@
   "Name": "EComponentId",
   "Values": [
     {
-      "Key": "ChatComponent",
+      "Key": "SampleComponent",
       "Value": "1"
     },
     {
       "Key": "ModifierComponent",
-      "Value": ""
-    },
+      "Value": "2"
+    }
   ]
 }

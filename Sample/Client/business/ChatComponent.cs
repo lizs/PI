@@ -29,7 +29,7 @@ using Pi.Gen;
 
 namespace Sample
 {
-    [ComponentId((short)EComponentId.ChatComponent)]
+    [ComponentId((short)EComponentId.SampleComponent)]
     public class SampleComponent : RpcComponent
     {
         /// <summary>

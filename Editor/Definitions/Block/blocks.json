@@ -7,6 +7,8 @@
       "Type": "Settable",
       "ItemType": "int",
       "DefaultValue": "0",
+      "Max": null,
+      "Min": null
     },
     {
       "PropertyId": "Two",
@@ -23,6 +25,8 @@
       "Type": "List",
       "ItemType": "string",
       "DefaultValue": "new string[]{\"1\", \"2\"}",
+      "Max": null,
+      "Min": null
     }
   ]
 }
