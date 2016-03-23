@@ -7,6 +7,12 @@
 * Automatic codes generation supported
 * Configurable
 
+####Getting Pi
+To install Pi, run the following command in the Package Manager Console
+```
+PM > Install-Package Pi
+```
+
 ####Framework
 Pi consists of 3 parts:`Node`/`ECS`/`Editor`
 #####Node
