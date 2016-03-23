@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E85C03F-27D2-41C8-9847-8F2C67A8FD90}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pi.Framework</RootNamespace>
+    <AssemblyName>Pi.Framework</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\Pi.Framework.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\Pi.Framework.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\protobuf-net.2.0.0.668\lib\net35\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\socket4net.0.1.4\lib\net35\socket4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\DataProtocol.cs" />
+    <Compile Include="..\DispatchableSession.cs" />
+    <Compile Include="..\ecs\component\Component.cs" />
+    <Compile Include="..\ecs\component\ComponentsMgr.cs" />
+    <Compile Include="..\ecs\component\EInternalComponentId.cs" />
+    <Compile Include="..\ecs\component\PropertyComponent.cs" />
+    <Compile Include="..\ecs\component\RpcComponent.cs" />
+    <Compile Include="..\ecs\component\SyncComponent.cs" />
+    <Compile Include="..\ecs\entity\Entity.cs" />
+    <Compile Include="..\ecs\entity\EntityData.cs" />
+    <Compile Include="..\ecs\entity\IProperty.cs" />
+    <Compile Include="..\ecs\entity\IScheduler.cs" />
+    <Compile Include="..\ecs\property\Block.cs" />
+    <Compile Include="..\ecs\property\EBlockType.cs" />
+    <Compile Include="..\ecs\property\EPropertyOps.cs" />
+    <Compile Include="..\ecs\property\IBlock.cs" />
+    <Compile Include="..\ecs\property\IBlockOps.cs" />
+    <Compile Include="..\ecs\property\IncreasableBlock.cs" />
+    <Compile Include="..\ecs\property\ListBlock.cs" />
+    <Compile Include="..\ecs\property\ListItemRepresentation.cs" />
+    <Compile Include="..\ecs\property\ListOpsProto.cs" />
+    <Compile Include="..\ecs\property\ListOpsRepresentation.cs" />
+    <Compile Include="..\ecs\property\PropertyBody.cs" />
+    <Compile Include="..\ecs\property\PropertyException.cs" />
+    <Compile Include="..\ecs\property\SettableBlock.cs" />
+    <Compile Include="..\ecs\system\Data\DataSys.cs" />
+    <Compile Include="..\ecs\system\Data\IRedisClient.cs" />
+    <Compile Include="..\ecs\system\Data\PersistSys.cs" />
+    <Compile Include="..\ecs\system\Data\SyncSys.cs" />
+    <Compile Include="..\ecs\system\EntitySys.cs" />
+    <Compile Include="..\ecs\system\EntitySysPublisher.cs" />
+    <Compile Include="..\ecs\system\ScheduleSys.cs" />
+    <Compile Include="..\node\Watch.cs" />
+    <Compile Include="..\reflection\AttributesCache.cs" />
+    <Compile Include="..\reflection\ComponentDepedencyCache.cs" />
+    <Compile Include="..\reflection\ComponentIdAttribute.cs" />
+    <Compile Include="..\reflection\ComponentsCache.cs" />
+    <Compile Include="..\util\Numeric\Add.cs" />
+    <Compile Include="..\util\Numeric\Compare.cs" />
+    <Compile Include="..\util\Numeric\Equals.cs" />
+    <Compile Include="..\util\Numeric\GreaterThan.cs" />
+    <Compile Include="..\util\Numeric\LessThan.cs" />
+    <Compile Include="..\util\Numeric\Subtract.cs" />
+    <Compile Include="..\PlayerMgr.cs" />
+    <Compile Include="..\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Player.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Publish/lib/net35"
+copy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Editor/lib/net35"
+copy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)Publish/lib/net35"
+copy "$(TargetDir)$(TargetName).xml" "$(SolutionDir)Publish/lib/net35"</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

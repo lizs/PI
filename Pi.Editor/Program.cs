@@ -6,6 +6,11 @@ namespace Pi.Editor
 {
     internal class Options
     {
+        [Option('f', "target", DefaultValue = "net45",
+            Required = false,
+            HelpText = "Target framework : net45/net35")]
+        public string Framework { get; set; }
+
         [Option('o', "output",
           HelpText = "Output assembly name")]
         public string OutputFileName { get; set; }
@@ -47,6 +52,13 @@ namespace Pi.Editor
                 {
                     Environment.Ins.OutputFileName = options.OutputFileName;
                 }
+                
+                if (!string.IsNullOrEmpty(options.Framework))
+                {
+                    Environment.Ins.Framework = options.Framework;
+                }
+
+                Environment.Ins.Prepare();
 
                 if (options.GenerateSample)
                 {
@@ -73,7 +85,6 @@ namespace Pi.Editor
                     Compiler.Compile();
 
                     Console.WriteLine("Success, Press any key to exit!");
-                    Console.ReadKey();
                 }
             }
             catch (Exception e)
@@ -81,7 +92,6 @@ namespace Pi.Editor
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 Console.WriteLine("Failed, Press any key to exit!");
-                Console.ReadKey();
             }
         }
     }

@@ -22,29 +22,33 @@
 //  THE SOFTWARE.
 //   * */
 #endregion
-using System.Threading.Tasks;
+
+using System;
+using System.Linq;
 using Pi.Framework;
 using Pi.Gen;
 
 namespace Sample
 {
-    public class SampleSession : ClientSession
+    public class SampleSession : Pi.Framework.DispatchableSession
     {
-        protected override Task<bool> OnNonPlayerPush(DataProtocol rp)
+        protected override void OnNonPlayerPush(DataProtocol rp, Action<bool> cb)
         {
-            switch ((ENonPlayerOps)rp.Ops)
+            if (rp.Ops == (short)ENonPlayerOps.CreatePlayer)
             {
-                case ENonPlayerOps.CreatePlayer:
-                {
-                    // 创建该玩家
-                    var player = PlayerMgr.Ins.CreateDefault<Player>(new PlayerArg(PlayerMgr.Ins, rp.PlayerId, this),
-                        true);
-                    return Task.FromResult(player != null);
-                }
-
-                default:
-                    return Task.FromResult(false);
+                // 创建该玩家
+                var player = PlayerMgr.Ins.CreateDefault<Player>(new PlayerArg(PlayerMgr.Ins, rp.PlayerId, this),
+                    true);
+                cb(player != null);
+                return;
             }
+
+            cb(false);
+        }
+
+        protected override Pi.Framework.Player GetPlayer(long playerId)
+        {
+            return playerId == 0 ? PlayerMgr.Ins.FirstOrDefault() : PlayerMgr.Ins.Get<Pi.Framework.Player>(playerId);
         }
     }
 }

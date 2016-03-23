@@ -23,11 +23,18 @@
 //   * */
 #endregion
 
+using System.Reflection;
 using Pi.Framework;
+using socket4net;
 
 namespace Sample
 {
-    public class ClientConfig : LauncherConfig
+    internal class MyLauncher : Launcher
     {
+        protected override void OnInit(ObjArg arg)
+        {
+            base.OnInit(arg);
+            ComponentsCache.Cache(Assembly.GetAssembly(GetType()));
+        }
     }
 }

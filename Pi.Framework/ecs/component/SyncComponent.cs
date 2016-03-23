@@ -48,13 +48,25 @@ namespace Pi.Framework
         
 #if NET45
         public override Task<bool> OnPush(short ops, byte[] data)
+#else
+        public override void OnPush(short ops, byte[] data, Action<bool> cb)
+#endif
         {
             switch ((ESyncOps) ops)
             {
                 case ESyncOps.Sync:
                 {
                     var lst = PiSerializer.DeserializeValue<List<EntityProto>>(data);
-                    if (lst.IsNullOrEmpty()) return Task.FromResult(false);
+                    if (lst.IsNullOrEmpty())
+                    {
+#if NET45
+                        return Task.FromResult(false);
+#else
+                        cb(false);
+                        return;
+#endif
+                    }
+
                     foreach (var proto in lst)
                     {
                         if (proto is EntityDestroyProto)
@@ -70,13 +82,21 @@ namespace Pi.Framework
                             entity.Apply(update.Blocks.Select(x => new Pair<short, byte[]>(x.Pid, x.Data)));
                         }
                     }
-
+                    
+#if NET45
                     return Task.FromResult(true);
+#else
+                        cb(true);
+                        return;
+#endif
                 }
             }
-
+                    
+#if NET45
             return Task.FromResult(false);
-        }
+#else
+            cb(false);
 #endif
+        }
     }
 }

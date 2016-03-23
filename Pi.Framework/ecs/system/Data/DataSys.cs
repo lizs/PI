@@ -80,7 +80,7 @@ namespace Pi.Framework
             UpdateCache.Remove(id);
         }
 
-        private void CacheBlock(long id, Type type, IReadOnlyCollection<IBlock> blocks)
+        private void CacheBlock(long id, Type type, List<IBlock> blocks)
         {
             if(blocks.IsNullOrEmpty()) return;
             foreach (var block in blocks)

@@ -33,16 +33,19 @@ namespace Sample
     {
         private static void Main(string[] args)
         {
-            // App.Config
-            var launcherCfg = LauncherConfig.LoadAs<ClientConfig>("Client.exe.config");
-
             // 创建并启动Launcher
-            Obj.New<MyLauncher>(new LauncherArg<ClientConfig>(launcherCfg, null), true);
+            var launcher = Obj.New<MyLauncher>(LauncherArg.Default, true);
+
+            // 创建并创建客户端
+            var client = Obj.New<Client<SampleSession>>(new ClientArg(null, "127.0.0.1", 6001, true), true);
 
             Test();
 
+            // 销毁客户端
+            client.Destroy();
+
             // 销毁Launcher
-            Launcher.Ins.Destroy();
+            launcher.Destroy();
         }
 
         private static Pi.Framework.Player Player

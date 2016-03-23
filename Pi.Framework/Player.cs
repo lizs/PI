@@ -124,9 +124,9 @@ namespace Pi.Framework
             return cp != null && await cp.OnPush(rp.Ops, rp.Data);
         }
 #else
-        public void OnRequest(IDataProtocol rq, Action<NetResult> cb)
+        public void OnRequest(DataProtocol rq, Action<NetResult> cb)
         {
-            var entity = rp.ObjId != 0 ? Es.Get(rp.ObjId) : this;
+            var entity = rq.ObjId != 0 ? Es.Get(rq.ObjId) : this;
             if (entity == null)
             {
                 cb(NetResult.Failure);
@@ -135,7 +135,7 @@ namespace Pi.Framework
 
             if (rq.ComponentId == 0)
             {
-                entity.OnMessageAsync(new NetReqMsg(rp.Ops, rp.Data), cb);
+                entity.OnRequest(rq.Ops, rq.Data, cb);
                 return;
             }
 
@@ -146,10 +146,10 @@ namespace Pi.Framework
                 return;
             }
 
-            cp.OnMessageAsync(new NetReqMsg(rp.Ops, rp.Data), cb);
+            cp.OnRequest(rq.Ops, rq.Data, cb);
         }
 
-        public void OnPush(IDataProtocol rp, Action<bool> cb)
+        public void OnPush(DataProtocol rp, Action<bool> cb)
         {
             var entity = rp.ObjId != 0 ? Es.Get(rp.ObjId) : this;
             if (entity == null)
@@ -159,7 +159,7 @@ namespace Pi.Framework
             }
             if (rp.ComponentId == 0)
             {
-                entity.OnMessageAsync(new NetPushMsg(rp.Ops, rp.Data), cb);
+                entity.OnPush(rp.Ops, rp.Data, cb);
                 return;
             }
 
@@ -170,7 +170,7 @@ namespace Pi.Framework
                 return;
             }
 
-            cp.OnMessageAsync(new NetReqMsg(rp.Ops, rp.Data), cb);
+            cp.OnPush(rp.Ops, rp.Data, cb);
         }
 
 #endif
@@ -178,6 +178,7 @@ namespace Pi.Framework
 
     public abstract class FlushablePlayer : Player, IFlushable
     {
+#if NET45
         public PersistSys Ps { get; private set; }
         private Func<IAsyncRedisClient> _redisClientGetter;
         private IAsyncRedisClient RedisClient
@@ -218,5 +219,10 @@ namespace Pi.Framework
 
             base.OnDestroy();
         }
+#else
+        public void Flush()
+        {
+        }
+#endif
     }
 }

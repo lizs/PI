@@ -89,7 +89,8 @@ namespace Pi.Framework
         }
 
         protected abstract Player GetPlayer(long playerId);
-
+        
+#if NET45
         protected virtual Task<NetResult> OnNonPlayerRequest(DataProtocol rq)
         {
             return Task.FromResult(NetResult.Failure);
@@ -151,6 +152,95 @@ namespace Pi.Framework
                 return cp != null && await cp.OnPush(proto.Ops, proto.Data);
             }
         }
+#else
+        protected virtual void OnNonPlayerRequest(DataProtocol rq, Action<NetResult> cb)
+        {
+            cb(NetResult.Failure);
+        }
+
+        protected virtual void OnNonPlayerPush(DataProtocol rp, Action<bool> cb)
+        {
+            cb(false);
+        }
+
+        public sealed override void HandleRequest(IDataProtocol rq, Action<NetResult> cb)
+        {
+            var proto = rq as DataProtocol;
+            if (proto.Ops < 0)
+            {
+                OnNonPlayerRequest(proto, cb);
+                return;
+            }
+
+            var player = GetPlayer(proto.PlayerId);
+            if (player == null)
+            {
+                cb(NetResult.Failure);
+                return;
+            }
+
+            var entity = proto.ObjId != 0 ? player.Es.Get(proto.ObjId) : player;
+            if (entity == null)
+            {
+                cb(NetResult.Failure);
+                return;
+            }
+
+            if (proto.ComponentId == 0)
+            {
+                entity.OnRequest(proto.Ops, proto.Data, cb);
+                return;
+            }
+
+            var cp = entity.GetComponent(proto.ComponentId);
+            if (cp == null)
+            {
+                cb(NetResult.Failure);
+                return;
+            }
+
+            cp.OnRequest(proto.Ops, proto.Data, cb);
+        }
+
+        public sealed override void HandlePush(IDataProtocol ps, Action<bool> cb)
+        {
+            var proto = ps as DataProtocol;
+            if (proto.Ops < 0)
+            {
+                OnNonPlayerPush(proto, cb);
+                return;
+            }
+
+            var player = GetPlayer(proto.PlayerId);
+            if (player == null)
+            {
+                cb(false);
+                return;
+            }
+
+            var entity = proto.ObjId != 0 ? player.Es.Get(proto.ObjId) : player;
+            if (entity == null)
+            {
+                cb(false);
+                return;
+            }
+
+            if (proto.ComponentId == 0)
+            {
+                entity.OnPush(proto.Ops, proto.Data, cb);
+                return;
+            }
+
+            var cp = entity.GetComponent(proto.ComponentId);
+            if (cp == null)
+            {
+                cb(false);
+                return;
+            }
+
+            cp.OnPush(proto.Ops, proto.Data, cb);
+        }
+#endif
 
 
         #region rpc

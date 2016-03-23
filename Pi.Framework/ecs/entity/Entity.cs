@@ -25,8 +25,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using socket4net;
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
@@ -45,18 +47,49 @@ namespace Pi.Framework
     {
     }
     
+    /// <summary>
+    ///     Entity(ECS)
+    /// </summary>
     public interface IEntity : IUniqueObj<long>, IProperty
     {
+        /// <summary>
+        ///     Get component by type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         T GetComponent<T>() where T : Component;
+
+        /// <summary>
+        ///     Get component by ComponentId
+        /// </summary>
+        /// <param name="cpId"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         T GetComponent<T>(short cpId) where T : Component;
+
+        /// <summary>
+        ///     Listen this entity's property changed event.
+        ///     when properties specified by 'pids' chanted,
+        ///     entity's EventPropertyChanged event will be raised
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
         void Listen(Action<IEntity, IBlock> handler, params short[] pids);
+
+        /// <summary>
+        ///     Unlisten
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
         void Unlisten(Action<IEntity, IBlock> handler, params short[] pids);
+
+        /// <summary>
+        ///     Send a message to this entity
+        /// </summary>
+        /// <param name="msg"></param>
         void SendMessage(Message msg);
     }
 
-    /// <summary>
-    ///    E(ECS)
-    /// </summary>
     public partial class Entity : UniqueObj<long>, IEntity, IEnumerable<Component>
     {
         /// <summary>
@@ -144,11 +177,23 @@ namespace Pi.Framework
             return Task.FromResult(false);
         }
 #else
+        /// <summary>
+        ///     Handle request
+        /// </summary>
+        /// <param name="ops"></param>
+        /// <param name="data"></param>
+        /// <param name="cb"></param>
         public virtual void OnRequest(short ops, byte[] data, Action<NetResult> cb)
         {
             cb(NetResult.Failure);
         }
         
+        /// <summary>
+        ///     Handle push
+        /// </summary>
+        /// <param name="ops"></param>
+        /// <param name="data"></param>
+        /// <param name="cb"></param>
         public virtual void OnPush(short ops, byte[] data, Action<bool> cb)
         {
             cb(false);

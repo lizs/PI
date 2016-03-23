@@ -14,7 +14,7 @@ namespace Pi.Gen
             base.OnInit(arg);
 
 			// inject blocks
-            Inject(new []
+            Inject(new List<IBlock>()
             {
                 BlockMaker.Create(EPid.One),
                 BlockMaker.Create(EPid.Two),

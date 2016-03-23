@@ -41,6 +41,9 @@ namespace Pi.Framework
         }
     }
 
+    /// <summary>
+    ///     Synchronous redis client based on ServiceStack.Redis
+    /// </summary>
     public class RedisClient : UniqueObj<string>, IRedisClient
     {
         private PooledRedisClientManager _mgr;
@@ -71,18 +74,6 @@ namespace Pi.Framework
             base.OnDestroy();
             _mgr.Dispose();
         }
-
-        private void LogException(string tag, Exception e)
-        {
-            if (e.InnerException != null)
-            {
-                Logger.Ins.Error("{0}:{1}:{2}", tag, e.InnerException.Message, e.InnerException.StackTrace);
-            }
-            else
-            {
-                Logger.Ins.Error("{0}:{1}:{2}", tag, e.Message, e.StackTrace);
-            }
-        }
         
         #region hash set
         public bool HashMultiDel(string hashid, List<string> feilds)
@@ -102,7 +93,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("HashMultiDel", e);
+                Logger.Ins.Exception("HashMultiDel", e);
                 return false;
             }
         }
@@ -134,7 +125,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("HashMultiSet", e);
+                Logger.Ins.Exception("HashMultiSet", e);
                 return false;
             }
         }
@@ -150,7 +141,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("HashGetAll", e);
+                Logger.Ins.Exception("HashGetAll", e);
                 return null;
             }
         }
@@ -167,7 +158,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("HashMultiGet", e);
+                Logger.Ins.Exception("HashMultiGet", e);
                 return null;
             }
         }
@@ -276,7 +267,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("Get", e);
+                Logger.Ins.Exception("Get", e);
                 return string.Empty;
             }
         }
@@ -292,7 +283,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("Get", e);
+                Logger.Ins.Exception("Get", e);
                 return null;
             }
         }
@@ -309,7 +300,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("Set", e);
+                Logger.Ins.Exception("Set", e);
                 return false;
             }
         }
@@ -326,7 +317,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("Set", e);
+                Logger.Ins.Exception("Set", e);
                 return false;
             }
         }
@@ -342,7 +333,7 @@ namespace Pi.Framework
             }
             catch (Exception e)
             {
-                LogException("Exist", e);
+                Logger.Ins.Exception("Exist", e);
                 return false;
             }
         }

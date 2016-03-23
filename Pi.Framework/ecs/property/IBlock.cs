@@ -164,8 +164,8 @@ namespace Pi.Framework
         int IndexOf(Predicate<TItem> condition);
         void Add(TItem item);
         bool Insert(int idx, TItem item);
-        void MultiAdd(IReadOnlyCollection<TItem> items);
-        void MultiRemove(IReadOnlyCollection<TItem> items);
+        void MultiAdd(List<TItem> items);
+        void MultiRemove(List<TItem> items);
         bool Remove(TItem item);
         bool RemoveAt(int idx);
         int RemoveAll(Predicate<TItem> predicate);

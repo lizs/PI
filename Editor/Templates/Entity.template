@@ -14,7 +14,7 @@ namespace Pi.Gen
             base.OnInit(arg);
 
 			// inject blocks
-            Inject(new []
+            Inject(new List<IBlock>()
             {{
 {2}
             }});

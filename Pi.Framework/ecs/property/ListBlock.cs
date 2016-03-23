@@ -39,15 +39,13 @@ namespace Pi.Framework
             return ++_uidSeed;
         }
 
-        public ListBlock(short id, IReadOnlyCollection<TItem> value, EBlockMode mode)
+        public ListBlock(short id, List<TItem> value, EBlockMode mode)
             : base(id, null, mode)
         {
             Value = new List<ListItemRepresentation<TItem>>();
+            if (value.IsNullOrEmpty()) return;
 
-            if (value != null && value.Count > 0)
-            {
-                MultiAdd(value);
-            }
+            MultiAdd(value);
         }
 
         public override string ToString()
@@ -246,18 +244,18 @@ namespace Pi.Framework
             return true;
         }
 
-        public void MultiAdd(IReadOnlyCollection<TItem> items)
+        public void MultiAdd(List<TItem> items)
         {
-            if (items == null || items.Count == 0) return;
+            if (items.IsNullOrEmpty()) return;
             foreach (var item in items)
             {
                 Add(item);
             }
         }
 
-        public void MultiRemove(IReadOnlyCollection<TItem> items)
+        public void MultiRemove(List<TItem> items)
         {
-            if (items == null) return;
+            if (items.IsNullOrEmpty()) return;
 
             foreach (var idx in items.Select(IndexOf).Where(idx => idx != -1))
             {

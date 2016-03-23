@@ -22,11 +22,13 @@
 //  THE SOFTWARE.
 //   * */
 #endregion
+#if NET45
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using socket4net;
+using System.Threading.Tasks;
+#endif
 
 namespace Pi.Framework
 {
@@ -36,7 +38,8 @@ namespace Pi.Framework
     public class PersistSys : DataSys
     {
         private bool _busy;
-
+        
+#if NET45
         /// <summary>
         ///     存储
         /// </summary>
@@ -85,5 +88,6 @@ namespace Pi.Framework
             _busy = false;
             return destroyRet;
         }
+#endif
     }
 }

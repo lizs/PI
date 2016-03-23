@@ -103,13 +103,13 @@ namespace Pi.Framework
             if (entity == null) return null;
 
             if (entry.Blocks.IsNullOrEmpty()) return entity;
-            var blocks = entry.Blocks.Select(ExtractBlock).Where(block => block != null).ToArray();
+            var blocks = entry.Blocks.Select(ExtractBlock).Where(block => block != null).ToList();
             entity.Apply(blocks);
 
             return entity;
         }
 
-        public IEnumerable<T> Extract<T>(IReadOnlyCollection<EntityEntry> entries)
+        public IEnumerable<T> Extract<T>(List<EntityEntry> entries)
             where T : Entity, new()
         {
             return entries.IsNullOrEmpty() ? null : entries.Select(Extract<T>);
@@ -124,9 +124,9 @@ namespace Pi.Framework
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public IReadOnlyCollection<RedisEntry> FormatEntity(Entity entity)
+        public List<RedisEntry> FormatEntity(Entity entity)
         {
-            return entity.Blocks.Select(x=>FormatBlock(entity.Id, x)).ToArray();
+            return entity.Blocks.Select(x=>FormatBlock(entity.Id, x)).ToList();
         }
 
         /// <summary>

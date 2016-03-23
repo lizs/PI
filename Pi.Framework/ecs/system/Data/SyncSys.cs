@@ -75,6 +75,7 @@ namespace Pi.Framework
             Sync(new[] {session});
         }
 
+#if NET45
         /// <summary>
         ///     在指定会话中同步实体数据
         /// </summary>
@@ -109,5 +110,11 @@ namespace Pi.Framework
             UpdateCache.Clear();
             DestroyCache.Clear();
         }
+#else
+        public void Sync(IEnumerable<DispatchableSession> sessions)
+        {
+            
+        }
+#endif
     }
 }

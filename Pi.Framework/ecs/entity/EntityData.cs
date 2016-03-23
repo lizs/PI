@@ -37,7 +37,7 @@ namespace Pi.Framework
     {
         private PropertyComponent _property;
 
-        public IReadOnlyCollection<IBlock> Blocks
+        public List<IBlock> Blocks
         {
             get { return _property.Blocks.ToList(); }
         }
@@ -52,7 +52,7 @@ namespace Pi.Framework
             _property.Inject(blocks);
         }
 
-        public bool Apply(IReadOnlyCollection<IBlock> blocks)
+        public bool Apply(List<IBlock> blocks)
         {
             return _property.Apply(blocks);
         }

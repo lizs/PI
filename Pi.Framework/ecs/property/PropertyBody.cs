@@ -48,7 +48,7 @@ namespace Pi.Framework
 
         public Dictionary<short, IBlock> Blocks { get; private set; }
 
-        public bool Apply(IReadOnlyCollection<IBlock> blocks)
+        public bool Apply(List<IBlock> blocks)
         {
             if (blocks.IsNullOrEmpty()) return true;
             foreach (var block in blocks)
@@ -158,7 +158,7 @@ namespace Pi.Framework
             return true;
         }
 
-        public virtual bool MultiAdd<TItem>(short pid, IReadOnlyCollection<TItem> items)
+        public virtual bool MultiAdd<TItem>(short pid, List<TItem> items)
         {
             if (!Contains<List<ListItemRepresentation<TItem>>>(pid)) return false;
 
@@ -195,7 +195,7 @@ namespace Pi.Framework
             return lstBlock != null && lstBlock.Remove(item);
         }
 
-        public virtual bool MultiRemove<TItem>(short pid, IReadOnlyCollection<TItem> items)
+        public virtual bool MultiRemove<TItem>(short pid, List<TItem> items)
         {
             if (!Contains<List<ListItemRepresentation<TItem>>>(pid)) return false;
 

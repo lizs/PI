@@ -124,7 +124,7 @@ namespace Pi.Editor
                         PropertyId = "Three",
                         Type = "List",
                         ItemType = "string",
-                        DefaultValue = "new string[]{\"1\", \"2\"}",
+                        DefaultValue = "new List<string>(){\"1\", \"2\"}",
                     }
                 }
             };

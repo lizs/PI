@@ -11,9 +11,10 @@ namespace Pi.Editor
         private static Environment _ins;
         private const string _templatesPath = "Templates";
         private const string _scriptsPath = "Scripts";
+        private const string _defRoot = "Definitions";
         private string _dllOutputPath = "Assembly";
         private string _outputFileName = "Pi.Gen";
-        private const string _defRoot = "Definitions";
+        private string _framwork = "45";
         private readonly string _blocksDefPath = string.Format("Definitions/{0}", EDefType.Block);
         private readonly string _constsDefPath = string.Format("Definitions/{0}", EDefType.Const);
         private readonly string _enumsDefPath = string.Format("Definitions/{0}", EDefType.Enum);
@@ -29,14 +30,17 @@ namespace Pi.Editor
                 var cfgPath = Path.Combine(FileSys.WorkingDirectory, EnvironmentJsonFile);
                 _ins = File.Exists(cfgPath) ? JsonSerializer.Deserialize<Environment>(cfgPath) : new Environment();
 
-                CreateDirectories(new[]
+                return _ins;
+            }
+        }
+
+        public void Prepare()
+        {
+            CreateDirectories(new[]
                 {
                     _ins.TemplatesPath, _ins.ScriptsPath, _ins.DllOutputPath, _ins.BlocksDefPath, _ins.ConstsDefPath,
                     _ins.EnumsDefPath, _ins.EntitiesDefPath, _ins.ProtosDefPath,
                 });
-
-                return _ins;
-            }
         }
 
         private static void CreateDirectories(string[] paths)
@@ -98,7 +102,7 @@ namespace Pi.Editor
         /// </summary>
         public string DllOutputPath
         {
-            get { return _dllOutputPath; }
+            get { return Path.Combine(_dllOutputPath, Framework); }
             set { _dllOutputPath = value; }
         }
 
@@ -122,6 +126,15 @@ namespace Pi.Editor
         {
             get { return _outputFileName; }
             set { _outputFileName = value; }
+        }
+
+        /// <summary>
+        ///     .net 框架版本
+        /// </summary>
+        public string Framework
+        {
+            get { return _framwork; }
+            set { _framwork = value; }
         }
     }
 }

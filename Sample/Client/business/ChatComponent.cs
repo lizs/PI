@@ -22,7 +22,8 @@
 //  THE SOFTWARE.
 //   * */
 #endregion
-using System.Threading.Tasks;
+
+using System;
 using Pi.Framework;
 using socket4net;
 using Pi.Gen;
@@ -88,16 +89,17 @@ namespace Sample
                 0, Id);
         }
 
-        public async override Task<NetResult> OnRequest(short ops, byte[] data)
+        public override void OnRequest(short ops, byte[] data, Action<NetResult> cb)
         {
             switch ((EOps)ops)
             {
                 default:
-                    return NetResult.Failure;
+                    cb(NetResult.Failure);
+                    break;
             }
         }
 
-        public async override Task<bool> OnPush(short ops, byte[] data)
+        public override void OnPush(short ops, byte[] data, Action<bool> cb)
         {
             switch ((EOps)ops)
             {
@@ -105,11 +107,13 @@ namespace Sample
                     {
                         var proto = PiSerializer.Deserialize<BroadcastProto>(data);
                         Logger.Ins.Info(proto.Message);
-                        return true;
+                        cb(true);
+                        return;
                     }
 
                 default:
-                    return false;
+                    cb(false);
+                    return;
             }
         }
     }

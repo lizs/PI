@@ -5,7 +5,7 @@
     <StartWorkingDirectory>D:\Git\Pi\Editor\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartWorkingDirectory>E:\GitRepository\Pi\Editor\</StartWorkingDirectory>
+    <StartWorkingDirectory>D:\Git\Pi\Editor\</StartWorkingDirectory>
     <StartArguments>-c</StartArguments>
   </PropertyGroup>
 </Project>

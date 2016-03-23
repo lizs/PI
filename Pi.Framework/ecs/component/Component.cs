@@ -23,6 +23,7 @@
 //   * */
 #endregion
 
+using System;
 using socket4net;
 #if NET45
 using System.Threading.Tasks;

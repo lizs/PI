@@ -193,6 +193,22 @@
                 卸载
             </summary>
         </member>
+        <member name="M:Pi.Framework.Entity.OnRequest(System.Int16,System.Byte[],System.Action{socket4net.NetResult})">
+            <summary>
+                Handle request
+            </summary>
+            <param name="ops"></param>
+            <param name="data"></param>
+            <param name="cb"></param>
+        </member>
+        <member name="M:Pi.Framework.Entity.OnPush(System.Int16,System.Byte[],System.Action{System.Boolean})">
+            <summary>
+                Handle push
+            </summary>
+            <param name="ops"></param>
+            <param name="data"></param>
+            <param name="cb"></param>
+        </member>
         <member name="M:Pi.Framework.Entity.Apply(System.Collections.Generic.IEnumerable{socket4net.Pair{System.Int16,System.Byte[]}})">
             <summary>
                 应用属性
@@ -415,11 +431,6 @@
                 存储系统
             </summary>
         </member>
-        <member name="M:Pi.Framework.PersistSys.PersistAsync(Pi.Framework.IAsyncRedisClient)">
-            <summary>
-                存储
-            </summary>
-        </member>
         <member name="T:Pi.Framework.SyncSys">
                 同步系统
                 即时批量同步
@@ -430,11 +441,6 @@
                 在指定会话中同步实体数据
             </summary>
             <param name="session"></param>
-        </member>
-        <member name="M:Pi.Framework.SyncSys.Sync(System.Collections.Generic.IEnumerable{Pi.Framework.DispatchableSession})">
-            <summary>
-                在指定会话中同步实体数据
-            </summary>
         </member>
         <member name="T:Pi.Framework.EntitySysArg">
             <summary>
@@ -545,115 +551,6 @@
             </summary>
             <param name="handler"></param>
             <param name="pids"></param>
-        </member>
-        <member name="T:Pi.Framework.SingleSessionNode`1">
-            <summary>
-                单会话节点
-                即：始终仅维护一条会话的节点，一般以客户端居多
-                如：Connector2GateClient
-            </summary>
-        </member>
-        <member name="T:Pi.Framework.Node">
-            <summary>
-                节点
-            </summary>
-        </member>
-        <member name="M:Pi.Framework.Node.GetConfig``1">
-            <summary>
-                获取配置
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Pi.Framework.Node.GetSession``1">
-            <summary>
-                获取会话集
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition"></param>
-            <returns></returns>
-        </member>
-        <member name="P:Pi.Framework.Node.Name">
-            <summary>
-                名
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.Node.Type">
-            <summary>
-                节点类型
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.Node.Peer">
-            <summary>
-                Peer
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.Node.Config">
-            <summary>
-                配置
-            </summary>
-        </member>
-        <member name="E:Pi.Framework.ClientNode`1.Watch">
-            <summary>
-                节点watch事件
-            </summary>
-        </member>
-        <member name="T:Pi.Framework.ConfigElementCollection`1">
-            <summary>
-                配置节点集合
-            </summary>
-            <typeparam name="TElement"></typeparam>
-        </member>
-        <member name="M:Pi.Framework.LauncherConfig.LoadAs``1(System.String,System.String)">
-            <summary>
-                加载App.Config
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="path"></param>
-            <param name="nodeCfgName"></param>
-            <returns></returns>
-        </member>
-        <member name="P:Pi.Framework.NodeElement.Guid">
-            <summary>
-                唯一Id
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.NodeElement.Type">
-            <summary>
-                节点类型
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Pi.Framework.NodeElement.NodeClass" -->
-        <member name="P:Pi.Framework.NodeElement.Ip">
-            <summary>
-                ip
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.NodeElement.Port">
-            <summary>
-                端口
-            </summary>
-        </member>
-        <member name="P:Pi.Framework.ServerNodeElement.ProxyIp">
-            <summary>
-                代理Ip
-            </summary>
-        </member>
-        <member name="T:Pi.Framework.NodesMgr">
-            <summary>
-                节点管理器
-            </summary>
-        </member>
-        <member name="T:Pi.Framework.RedisClient">
-            <summary>
-                Synchronous redis client based on ServiceStack.Redis
-            </summary>
-        </member>
-        <member name="T:Pi.Framework.ServerNode`1">
-            <summary>
-                服务器节点
-            </summary>
-            <typeparam name="TSession"></typeparam>
         </member>
         <member name="T:Pi.Framework.ComponentsCache">
             <summary>

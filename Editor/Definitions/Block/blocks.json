@@ -24,7 +24,7 @@
       "Mode": "Synchronizable",
       "Type": "List",
       "ItemType": "string",
-      "DefaultValue": "new string[]{\"1\", \"2\"}",
+      "DefaultValue": "new List<string>(){\"1\", \"2\"}",
       "Max": null,
       "Min": null
     }

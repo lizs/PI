@@ -178,7 +178,7 @@ namespace Pi.Framework
 
         #region 属性操作
 
-        public bool Apply(IReadOnlyCollection<IBlock> blocks)
+        public bool Apply(List<IBlock> blocks)
         {
             return PropertyBody.Apply(blocks);
         }
