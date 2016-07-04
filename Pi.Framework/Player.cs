@@ -50,7 +50,13 @@ namespace Pi.Framework
             RedisClientGetter = redisClientGetter;
         }
 
+        /// <summary>
+        ///     if persist enabled
+        /// </summary>
         public bool PersistEnabled { get; private set; }
+        /// <summary>
+        ///     redis client getter
+        /// </summary>
         public Func<IAsyncRedisClient> RedisClientGetter { get; private set; }
     }
 
@@ -63,9 +69,18 @@ namespace Pi.Framework
     /// </summary>
     public abstract class Player : Entity
     {
+        /// <summary>
+        ///     entity system
+        /// </summary>
         public EntitySys Es { get; protected set; }
+        /// <summary>
+        ///     sync system
+        /// </summary>
         public SyncSys Ss { get; private set; }
 
+        /// <summary>
+        ///     Tcp session attached to this Player
+        /// </summary>
         public DispatchableSession Session { get; private set; }
         protected override void OnInit(ObjArg arg)  
         {
@@ -176,6 +191,9 @@ namespace Pi.Framework
 #endif
     }
 
+    /// <summary>
+    ///     
+    /// </summary>
     public abstract class FlushablePlayer : Player, IFlushable
     {
 #if NET45

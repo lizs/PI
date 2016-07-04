@@ -32,6 +32,9 @@ using System.Threading.Tasks;
 
 namespace Pi.Framework
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EntityArg : UniqueObjArg<long>
     {
         public EntityArg(IObj parent, long key)
@@ -92,6 +95,33 @@ namespace Pi.Framework
 
     public partial class Entity : UniqueObj<long>, IEntity, IEnumerable<Component>
     {
+        private readonly MessageHandler _messageHandlers = new MessageHandler();
+        /// <summary>
+        ///     message handlers
+        /// </summary>
+        protected MessageHandler MessageHandlers { get { return _messageHandlers; } }
+
+        /// <summary>
+        ///     Register a handler for message of type T
+        ///     Only 1 handler needed
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        public void Register<T>(Action<Message> handler) where T : Message
+        {
+            _messageHandlers.Register<T>(handler);
+        }
+
+        /// <summary>
+        ///     Deregister the handler for message of type T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        public void Deregister<T>(Action<Message> handler) where T : Message
+        {
+            _messageHandlers.Deregister<T>(handler);
+        }
+
         /// <summary>
         ///     创建组件
         /// </summary>
@@ -114,7 +144,7 @@ namespace Pi.Framework
             SpawnComponents();
 
             // 缓存内置组件（可能为空）
-            _property = GetComponent<PropertyComponent>();
+            Property = GetComponent<PropertyComponent>();
         }
 
         /// <summary>
@@ -146,6 +176,9 @@ namespace Pi.Framework
         {
             base.OnDestroy();
 
+            // clear the message handlers
+            _messageHandlers.Clear();
+
             // 销毁组件
             Components.Destroy();
         }
@@ -154,24 +187,31 @@ namespace Pi.Framework
 
         public void SendMessage(Message msg)
         {
-            OnMessage(msg);
-
+            _messageHandlers.Dispatch(msg);
             foreach (var component in Components)
             {
-                component.OnMessage(msg);
+                component.Dispatch(msg);
             }
         }
 
-        public virtual void OnMessage(Message msg)
-        {
-        }
-
 #if NET45
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ops"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public virtual Task<NetResult> OnRequest(short ops, byte[] data)
         {
             return Task.FromResult(NetResult.Failure);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ops"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public virtual Task<bool> OnPush(short ops, byte[] data)
         {
             return Task.FromResult(false);
@@ -203,6 +243,9 @@ namespace Pi.Framework
         #region 组件化实现
 
         private ComponentsMgr _components;
+        /// <summary>
+        /// 
+        /// </summary>
         public ComponentsMgr Components
         {
             get
@@ -213,11 +256,21 @@ namespace Pi.Framework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public Component GetComponent(short key)
         {
             return Components.Get(key);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public bool RemoveComponent(short key)
         {
             return Components.Destroy(key);
@@ -233,26 +286,51 @@ namespace Pi.Framework
             return Components.Get(cpId) as T;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<T> GetComponents<T>() where T : Component
         {
             return Components.Get<T>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T AddComponent<T>() where T : Component, new()
         {
             return Components.AddComponent<T>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cpType"></param>
+        /// <returns></returns>
         public Component AddComponent(Type cpType)
         {
             return Components.AddComponent(cpType);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cpId"></param>
+        /// <returns></returns>
         public Component AddComponent(short cpId)
         {
             return Components.AddComponent(cpId);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<short> RemoveComponent<T>() where T : Component
         {
             return Components.Destroy<T>();
@@ -274,12 +352,12 @@ namespace Pi.Framework
 
         public void Listen(Action<IEntity, IBlock> handler, params short[] pids)
         {
-            _property.Listen(handler, pids);
+            Property.Listen(handler, pids);
         }
 
         public void Unlisten(Action<IEntity, IBlock> handler, params short[] pids)
         {
-            _property.Unlisten(handler, pids);
+            Property.Unlisten(handler, pids);
         }
 
         #endregion

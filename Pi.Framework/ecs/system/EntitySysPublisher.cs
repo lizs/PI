@@ -38,21 +38,21 @@ namespace Pi.Framework
         /// <summary>
         ///     全局监听者，即：监听任何类型的任何属性改变
         /// </summary>
-        private readonly List<Action<Entity, IBlock>> _globalListenrs =
-            new List<Action<Entity, IBlock>>();
+        private readonly List<Action<IEntity, IBlock>> _globalListenrs =
+            new List<Action<IEntity, IBlock>>();
 
         /// <summary>
         ///     全局类型监听者，即：监听某类型的任何属性改变
         /// </summary>
-        private readonly Dictionary<Type, List<Action<Entity, IBlock>>> _globalTypeListeners =
-            new Dictionary<Type, List<Action<Entity, IBlock>>>();
+        private readonly Dictionary<Type, List<Action<IEntity, IBlock>>> _globalTypeListeners =
+            new Dictionary<Type, List<Action<IEntity, IBlock>>>();
 
         /// <summary> 
         ///     类型监听， 即：监听某个类型的某些属性改变
         /// </summary>
-        private readonly Dictionary<Type, Dictionary<short, List<Action<Entity, IBlock>>>>
+        private readonly Dictionary<Type, Dictionary<short, List<Action<IEntity, IBlock>>>>
             _typeListeners =
-                new Dictionary<Type, Dictionary<short, List<Action<Entity, IBlock>>>>();
+                new Dictionary<Type, Dictionary<short, List<Action<IEntity, IBlock>>>>();
 
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Pi.Framework
         /// </summary>
         /// <param name="host"></param>
         /// <param name="block"></param>
-        public void Publish(Entity host, IBlock block)
+        public void Publish(IEntity host, IBlock block)
         {
 #if DEBUG
             using (new AutoWatch(string.Format("通知属性 : {0}", block.Id)))
@@ -93,11 +93,11 @@ namespace Pi.Framework
         /// <param name="type"></param>
         /// <param name="host"></param>
         /// <param name="block"></param>
-        private void Publish(Type type, Entity host, IBlock block)
+        private void Publish(Type type, IEntity host, IBlock block)
         {
             while (true)
             {
-                if (type == null || type == typeof(Entity))
+                if (type == null || type == typeof(IEntity))
                     return;
 
                 // type listeners
@@ -146,7 +146,7 @@ namespace Pi.Framework
         ///     监听全局属性
         /// </summary>
         /// <param name="handler"></param>
-        public void GlobalListen(Action<Entity, IBlock> handler)
+        public void GlobalListen(Action<IEntity, IBlock> handler)
         {
             if (!_globalListenrs.Contains(handler))
                 _globalListenrs.Add(handler);
@@ -158,7 +158,7 @@ namespace Pi.Framework
         ///     取消监听全局属性
         /// </summary>
         /// <param name="handler"></param>
-        public void GlobalUnlisten(Action<Entity, IBlock> handler)
+        public void GlobalUnlisten(Action<IEntity, IBlock> handler)
         {
             if (!_globalListenrs.Remove(handler))
                 Logger.Ins.Warn("Handler {0} not registered in global publisher!", handler);
@@ -168,28 +168,48 @@ namespace Pi.Framework
         ///     监听某类型对象的任何属性修改
         /// </summary>
         /// <param name="handler"></param>
-        public void GlobalListen<T>(Action<Entity, IBlock> handler) where T : Entity
+        public void GlobalListen<T>(Action<IEntity, IBlock> handler) where T : IEntity
         {
-            if (!_globalTypeListeners.ContainsKey(typeof(T)))
-                _globalTypeListeners.Add(typeof(T), new List<Action<Entity, IBlock>>());
+            GlobalListen(typeof(T), handler);
+        }
 
-            var listeners = _globalTypeListeners[typeof(T)];
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="handler"></param>
+        public void GlobalListen(Type type, Action<IEntity, IBlock> handler)
+        {
+            if (!_globalTypeListeners.ContainsKey(type))
+                _globalTypeListeners.Add(type, new List<Action<IEntity, IBlock>>());
+
+            var listeners = _globalTypeListeners[type];
             if (!listeners.Contains(handler))
                 listeners.Add(handler);
             else
-                Logger.Ins.Warn("Handler {0} already registered for type {2}!", handler, typeof(T));
+                Logger.Ins.Warn("Handler {0} already registered for type {2}!", handler, type);
         }
 
         /// <summary>
         ///     取消监听某类型对象的任何属性修改
         /// </summary>
         /// <param name="handler"></param>
-        public void GlobalUnlisten<T>(Action<Entity, IBlock> handler) where T : Entity
+        public void GlobalUnlisten<T>(Action<IEntity, IBlock> handler) where T : IEntity
         {
-            if (!_globalTypeListeners.ContainsKey(typeof(T)))
+            GlobalUnlisten(typeof(T), handler);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        public void GlobalUnlisten(Type type, Action<IEntity, IBlock> handler)
+        {
+            if (!_globalTypeListeners.ContainsKey(type))
                 return;
 
-            var listeners = _globalTypeListeners[typeof(T)];
+            var listeners = _globalTypeListeners[type];
             listeners.Remove(handler);
         }
 
@@ -198,46 +218,66 @@ namespace Pi.Framework
         /// </summary>
         /// <param name="handler"></param>
         /// <param name="pids"></param>
-        public void Listen<T>(Action<Entity, IBlock> handler, params short[] pids) where T : Entity
+        public void Listen<T>(Action<IEntity, IBlock> handler, params short[] pids) where T : IEntity
+        {
+            Listen(typeof (T), handler, pids);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
+        public void Listen(Type type, Action<IEntity, IBlock> handler, params short[] pids) 
         {
             if (pids.Length == 0) return;
 
-            if (!_typeListeners.ContainsKey(typeof(T)))
-                _typeListeners.Add(typeof(T), new Dictionary<short, List<Action<Entity, IBlock>>>());
+            if (!_typeListeners.ContainsKey(type))
+                _typeListeners.Add(type, new Dictionary<short, List<Action<IEntity, IBlock>>>());
 
-            var typeDic = _typeListeners[typeof(T)];
+            var typeDic = _typeListeners[type];
             foreach (var pid in pids)
             {
                 if (!typeDic.ContainsKey(pid))
-                    typeDic.Add(pid, new List<Action<Entity, IBlock>>());
+                    typeDic.Add(pid, new List<Action<IEntity, IBlock>>());
 
                 var listeners = typeDic[pid];
                 if (!listeners.Contains(handler))
                     listeners.Add(handler);
                 else
-                    Logger.Ins.Warn("Handler {0} already registered for {1} of type {2}!", handler, pid, typeof(T));
+                    Logger.Ins.Warn("Handler {0} already registered for {1} of type {2}!", handler, pid, type);
             }
         }
-
         /// <summary>
         ///     取消监听类型
         /// </summary>
         /// <param name="handler"></param>
         /// <param name="pids"></param>
-        public void Unlisten<T>(Action<Entity, IBlock> handler, params short[] pids) where T : Entity
+        public void Unlisten<T>(Action<IEntity, IBlock> handler, params short[] pids) where T : IEntity
+        {
+            Unlisten(typeof (T), handler, pids);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
+        public void Unlisten(Type type, Action<IEntity, IBlock> handler, params short[] pids)
         {
             if (pids.Length == 0) return;
 
-            if (!_typeListeners.ContainsKey(typeof(T)))
+            if (!_typeListeners.ContainsKey(type))
                 return;
 
-            var typeDic = _typeListeners[typeof(T)];
+            var typeDic = _typeListeners[type];
             foreach (var pid in pids.Where(typeDic.ContainsKey))
             {
                 typeDic[pid].Remove(handler);
             }
         }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();

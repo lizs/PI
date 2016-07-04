@@ -99,7 +99,7 @@ namespace Pi.Framework
             lst.Value.Add(block);
         }
 
-        private void OnEntityPropertyChanged(Entity entity, IBlock block)
+        private void OnEntityPropertyChanged(IEntity entity, IBlock block)
         {
             CacheBlock(entity.Id, entity.GetType(), block);
         }

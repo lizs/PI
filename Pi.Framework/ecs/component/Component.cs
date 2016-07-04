@@ -25,8 +25,11 @@
 
 using System;
 using socket4net;
+using System.Collections.Generic;
 #if NET45
 using System.Threading.Tasks;
+#else
+using System;
 #endif
 
 namespace Pi.Framework
@@ -49,6 +52,12 @@ namespace Pi.Framework
     /// </summary>
     public abstract class Component : UniqueObj<short>, IComponent
     {
+        private readonly MessageHandler _messageHandlers = new MessageHandler();
+        /// <summary>
+        ///     message handlers
+        /// </summary>
+        protected MessageHandler MessageHandlers { get { return _messageHandlers; } }
+
         /// <summary>
         ///     实体爹
         /// </summary>
@@ -65,6 +74,16 @@ namespace Pi.Framework
         public T GetComponent<T>() where T : Component
         {
             return GetAncestor<Entity>().GetComponent<T>();
+        }
+
+        /// <summary>
+        ///     获取兄弟组件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public List<T> GetComponents<T>() where T : Component
+        {
+            return GetAncestor<Entity>().GetComponents<T>();
         }
 
         /// <summary>
@@ -94,6 +113,7 @@ namespace Pi.Framework
         {
             OnUnsubscribe();
             base.OnDestroy();
+            _messageHandlers.Clear();
         }
 
         /// <summary>
@@ -114,8 +134,30 @@ namespace Pi.Framework
         ///     处理消息
         /// </summary>
         /// <param name="msg"></param>
-        public virtual void OnMessage(Message msg)
+        public void Dispatch(Message msg)
         {
+            _messageHandlers.Dispatch(msg);
+        } 
+
+        /// <summary>
+        ///     Register a handler for message of type T
+        ///     Only 1 handler needed
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        public void Register<T>(Action<Message> handler) where T : Message
+        {
+            _messageHandlers.Register<T>(handler);
+        }
+
+        /// <summary>
+        ///     Deregister the handler for message of type T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="handler"></param>
+        public void Deregister<T>(Action<Message> handler) where T : Message
+        {
+            _messageHandlers.Deregister<T>(handler);
         }
 
 #if NET45

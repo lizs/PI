@@ -62,12 +62,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Pi.Framework\proj.net35\Pi.Framework35.csproj">
-      <Project>{6e85c03f-27d2-41c8-9847-8f2c67a8fd90}</Project>
+    <ProjectReference Include="..\..\Pi.Framework\Pi.Framework35.csproj">
+      <Project>{237260b0-6db3-4245-8c08-3e0870a0a71e}</Project>
       <Name>Pi.Framework35</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

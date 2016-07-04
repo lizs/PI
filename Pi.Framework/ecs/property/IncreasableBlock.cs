@@ -22,6 +22,9 @@
 //  THE SOFTWARE.
 //   * */
 #endregion
+
+using socket4net;
+
 namespace Pi.Framework
 {
     public class IncreasableBlock<TItem> : Block<TItem>, IIncreasableBlock<TItem>

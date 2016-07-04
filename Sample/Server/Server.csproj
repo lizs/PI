@@ -68,8 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Pi.Framework\proj.net45\Pi.Framework45.csproj">
-      <Project>{00f1c362-928d-46c0-919a-241b0820ada4}</Project>
+    <ProjectReference Include="..\..\Pi.Framework\Pi.Framework45.csproj">
+      <Project>{5eeadfdf-c70b-468c-9f25-1b83d1218ccb}</Project>
       <Name>Pi.Framework45</Name>
     </ProjectReference>
   </ItemGroup>

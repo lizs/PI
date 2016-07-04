@@ -30,15 +30,58 @@ using socket4net;
 namespace Pi.Framework
 {
     /// <summary>
+    ///     属性修改通知消息
+    /// </summary>
+    public class PropertyMessage : Message
+    {
+        /// <summary>
+        ///     source
+        /// </summary>
+        public IEntity Entity { get; private set; }
+        /// <summary>
+        ///     changed block
+        /// </summary>
+        public IBlock Block { get; private set; }
+        /// <summary>
+        ///     affected pid
+        /// </summary>
+        public short Pid { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="entity"></param>
+        public PropertyMessage(short pid, IEntity entity)
+        {
+            Entity = entity;
+            Pid = pid;
+            Block = (entity as Entity).GetBlock(pid);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="entity"></param>
+        public PropertyMessage(IBlock block, IEntity entity)
+        {
+            Entity = entity;
+            Pid = block.Id;
+            Block = block;
+        }
+    }
+
+    /// <summary>
     ///     内置属性组件
     /// </summary>
     [ComponentId((short)EInternalComponentId.Property)]
     public class PropertyComponent : Component, IProperty
     {
+        private PropertyBody _propertyBody;
         /// <summary>
         ///     属性体
         /// </summary>
-        private PropertyBody _propertyBody;
         public PropertyBody PropertyBody
         {
             get
@@ -100,8 +143,9 @@ namespace Pi.Framework
         /// <param name="block"></param>
         public void NotifyPropertyChanged(IBlock block)
         {
-            // 通知自己
-            OnPropertyChanged(block);
+            // 通知实体属性改变
+            var entity = GetAncestor<Entity>();
+            entity.SendMessage(new PropertyMessage(block, GetAncestor<Entity>()));
 
             // 通知任意属性修改监听者
             var greedyActions = GreedyListeners.ToArray();
@@ -121,20 +165,16 @@ namespace Pi.Framework
             }
 
             // 全局（类型监听者）通知
-            //var publisher = GetAncestor<IPropertyPublishable>();
-            //if (publisher != null)
-            //    publisher.Publisher.Publish(Host, block);
+            var player = GetAncestor<Player>();
+            if (player != null)
+                player.Es.Publish(Host, block);
         }
-
 
         /// <summary>
-        ///     通知属性改变
+        /// 
         /// </summary>
-        /// <param name="block"></param>
-        protected virtual void OnPropertyChanged(IBlock block)
-        {
-        }
-
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
         public void Listen(Action<IEntity, IBlock> handler, params short[] pids)
         {
             if (pids.Length == 0)
@@ -160,6 +200,11 @@ namespace Pi.Framework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="pids"></param>
         public void Unlisten(Action<IEntity, IBlock> handler, params short[] pids)
         {
             if (pids.Length == 0)
@@ -211,7 +256,9 @@ namespace Pi.Framework
         public void NotifyPropertyChanged(short pid)
         {
             if (Started)
+            {
                 NotifyPropertyChanged(PropertyBody.Blocks[pid]);
+            }
         }
 
         public void NotifyPropertyChanged()

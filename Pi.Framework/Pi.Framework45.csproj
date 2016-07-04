@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5EEADFDF-C70B-468C-9F25-1B83D1218CCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pi.Framework</RootNamespace>
+    <AssemblyName>Pi.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin45\Release\</OutputPath>
+    <DefineConstants>TRACE;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin45\Release\Pi.Framework.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.54\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=4.0.54.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Redis.4.0.54\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Socket4Net\Publish\lib\net45\socket4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataProtocol.cs" />
+    <Compile Include="DispatchableSession.cs" />
+    <Compile Include="ecs\component\Component.cs" />
+    <Compile Include="ecs\component\ComponentsMgr.cs" />
+    <Compile Include="ecs\component\EInternalComponentId.cs" />
+    <Compile Include="ecs\component\PropertyComponent.cs" />
+    <Compile Include="ecs\component\RpcComponent.cs" />
+    <Compile Include="ecs\component\SyncComponent.cs" />
+    <Compile Include="ecs\entity\Entity.cs" />
+    <Compile Include="ecs\entity\EntityData.cs" />
+    <Compile Include="ecs\entity\IProperty.cs" />
+    <Compile Include="ecs\entity\IScheduler.cs" />
+    <Compile Include="ecs\entity\MessageHandler.cs" />
+    <Compile Include="ecs\property\Block.cs" />
+    <Compile Include="ecs\property\EBlockType.cs" />
+    <Compile Include="ecs\property\EPropertyOps.cs" />
+    <Compile Include="ecs\property\IBlock.cs" />
+    <Compile Include="ecs\property\IBlockOps.cs" />
+    <Compile Include="ecs\property\IncreasableBlock.cs" />
+    <Compile Include="ecs\property\ListBlock.cs" />
+    <Compile Include="ecs\property\ListItemRepresentation.cs" />
+    <Compile Include="ecs\property\ListOpsProto.cs" />
+    <Compile Include="ecs\property\ListOpsRepresentation.cs" />
+    <Compile Include="ecs\property\PropertyBody.cs" />
+    <Compile Include="ecs\property\PropertyException.cs" />
+    <Compile Include="ecs\property\SettableBlock.cs" />
+    <Compile Include="ecs\system\Data\DataSys.cs" />
+    <Compile Include="ecs\system\Data\IRedisClient.cs" />
+    <Compile Include="ecs\system\Data\PersistSys.cs" />
+    <Compile Include="ecs\system\Data\SyncSys.cs" />
+    <Compile Include="ecs\system\EntitySys.cs" />
+    <Compile Include="ecs\system\EntitySysPublisher.cs" />
+    <Compile Include="ecs\system\ScheduleSys.cs" />
+    <Compile Include="node\ClientNode.cs" />
+    <Compile Include="node\config\ConfigElement.cs" />
+    <Compile Include="node\config\ConfigElementCollection.cs" />
+    <Compile Include="node\config\LauncherConfig.cs" />
+    <Compile Include="node\config\LogConfigElement.cs" />
+    <Compile Include="node\config\NodeCollection.cs" />
+    <Compile Include="node\config\NodeElement.cs" />
+    <Compile Include="node\Launcher.cs" />
+    <Compile Include="node\Node.cs" />
+    <Compile Include="node\NodeMgr.cs" />
+    <Compile Include="node\redis\AsyncRedisClient.cs" />
+    <Compile Include="node\redis\RedisClient.cs" />
+    <Compile Include="node\redis\RedisMgr.cs" />
+    <Compile Include="node\ServerNode.cs" />
+    <Compile Include="node\SingleSessionNode.cs" />
+    <Compile Include="node\Watch.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerMgr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reflection\AttributesCache.cs" />
+    <Compile Include="reflection\ComponentDepedencyCache.cs" />
+    <Compile Include="reflection\ComponentIdAttribute.cs" />
+    <Compile Include="reflection\ComponentsCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.45.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Publish/lib/net45"
+copy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Editor/lib/net45"
+copy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)Publish/lib/net45"
+copy "$(TargetDir)$(TargetName).xml" "$(SolutionDir)Publish/lib/net45"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

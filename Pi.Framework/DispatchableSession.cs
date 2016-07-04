@@ -34,7 +34,7 @@ namespace Pi.Framework
 {
     public abstract class ClientSession : DispatchableSession
     {
-        protected override sealed Player GetPlayer(long playerId)
+        protected sealed override Player GetPlayer(long playerId)
         {
             return playerId == 0 ? PlayerMgr.Ins.FirstOrDefault() : PlayerMgr.Ins.Get(playerId);
         }
@@ -42,7 +42,7 @@ namespace Pi.Framework
 
     public abstract class ServerSession : DispatchableSession
     {
-        protected override sealed Player GetPlayer(long playerId)
+        protected sealed override Player GetPlayer(long playerId)
         {
             return PlayerMgr.Ins.Get(playerId);
         }
@@ -101,7 +101,7 @@ namespace Pi.Framework
             return Task.FromResult(false);
         }
         
-        public async override Task<NetResult> HandleRequest(IDataProtocol rq)
+        public override async Task<NetResult> HandleRequest(IDataProtocol rq)
         {
             var proto = rq as DataProtocol;
             if (proto.Ops < 0)
@@ -128,7 +128,7 @@ namespace Pi.Framework
             }
         }
 
-        public async override Task<bool> HandlePush(IDataProtocol ps)
+        public override async Task<bool> HandlePush(IDataProtocol ps)
         {
             var proto = ps as DataProtocol;
             if (proto.Ops < 0)

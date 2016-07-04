@@ -35,26 +35,29 @@ namespace Pi.Framework
     /// </summary>
     public partial class Entity
     {
-        private PropertyComponent _property;
+        /// <summary>
+        /// ÊôÐÔ×é¼þ
+        /// </summary>
+        public PropertyComponent Property { get; private set; }
 
         public List<IBlock> Blocks
         {
-            get { return _property.Blocks.ToList(); }
+            get { return Property.Blocks.ToList(); }
         }
 
         public IBlock GetBlock(short key)
         {
-            return _property.GetBlock(key);
+            return Property.GetBlock(key);
         }
 
         public void Inject(IEnumerable<IBlock> blocks)
         {
-            _property.Inject(blocks);
+            Property.Inject(blocks);
         }
 
         public bool Apply(List<IBlock> blocks)
         {
-            return _property.Apply(blocks);
+            return Property.Apply(blocks);
         }
         
         /// <summary>
@@ -80,142 +83,142 @@ namespace Pi.Framework
 
         public T Get<T>(short id)
         {
-            return _property.Get<T>(id);
+            return Property.Get<T>(id);
         }
 
         public bool Get<T>(short id, out T value)
         {
-            return _property.Get<T>(id, out value);
+            return Property.Get<T>(id, out value);
         }
 
         public List<T> GetList<T>(short id)
         {
-            return _property.GetList<T>(id);
+            return Property.GetList<T>(id);
         }
 
         public bool Inject(IBlock block)
         {
-            return _property.Inject(block);
+            return Property.Inject(block);
         }
 
         public bool Inc<T>(short id, T delta)
         {
-            return _property.Inc(id, delta);
+            return Property.Inc(id, delta);
         }
 
         public bool Inc(short id, object delta)
         {
-            return _property.Inc(id, delta);
+            return Property.Inc(id, delta);
         }
 
         public bool Inc<T>(short id, T delta, out T overflow)
         {
-            return _property.Inc(id, delta, out overflow);
+            return Property.Inc(id, delta, out overflow);
         }
 
         public bool Inc(short id, object delta, out object overflow)
         {
-            return _property.Inc(id, delta, out overflow);
+            return Property.Inc(id, delta, out overflow);
         }
 
         public bool IncTo<T>(short id, T target)
         {
-            return _property.IncTo(id, target);
+            return Property.IncTo(id, target);
         }
 
         public bool IncTo(short id, object target)
         {
-            return _property.IncTo(id, target);
+            return Property.IncTo(id, target);
         }
 
         public bool Set<T>(short id, T value)
         {
-            return _property.Set(id, value);
+            return Property.Set(id, value);
         }
 
         public bool Set(short id, object value)
         {
-            return _property.Set(id, value);
+            return Property.Set(id, value);
         }
 
         public int IndexOf<T>(short pid, T item)
         {
-            return _property.IndexOf(pid, item);
+            return Property.IndexOf(pid, item);
         }
 
         public int IndexOf<T>(short pid, Predicate<T> condition)
         {
-            return _property.IndexOf(pid, condition);
+            return Property.IndexOf(pid, condition);
         }
 
         public T GetByIndex<T>(short pid, int idx)
         {
-            return _property.GetByIndex<T>(pid, idx);
+            return Property.GetByIndex<T>(pid, idx);
         }
 
         public bool Add<T>(short id, T value)
         {
-            return _property.Add(id, value);
+            return Property.Add(id, value);
         }
 
         public bool Add(short id, object value)
         {
-            return _property.Add(id, value);
+            return Property.Add(id, value);
         }
 
         public bool AddRange<T>(short id, List<T> items)
         {
-            return _property.AddRange(id, items);
+            return Property.AddRange(id, items);
         }
 
         public bool Remove<T>(short id, T item)
         {
-            return _property.Remove(id, item);
+            return Property.Remove(id, item);
         }
 
         public bool Remove(short id, object item)
         {
-            return _property.Remove(id, item);
+            return Property.Remove(id, item);
         }
 
         public bool RemoveAll<T>(short id, Predicate<T> predicate)
         {
-            return _property.RemoveAll(id, predicate);
+            return Property.RemoveAll(id, predicate);
         }
 
         public bool RemoveAll<T>(short id, Predicate<T> predicate, out int count)
         {
-            return _property.RemoveAll(id, predicate, out count);
+            return Property.RemoveAll(id, predicate, out count);
         }
 
         public bool RemoveAll(short id)
         {
-            return _property.RemoveAll(id);
+            return Property.RemoveAll(id);
         }
 
         public bool RemoveAll(short id, out int count)
         {
-            return _property.RemoveAll(id, out count);
+            return Property.RemoveAll(id, out count);
         }
 
         public bool Insert<T>(short id, int idx, T item)
         {
-            return _property.Insert(id, idx, item);
+            return Property.Insert(id, idx, item);
         }
 
         public bool Insert(short id, int idx, object item)
         {
-            return _property.Insert(id, idx, item);
+            return Property.Insert(id, idx, item);
         }
 
         public bool Replace<T>(short id, int idx, T item)
         {
-            return _property.Replace(id, idx, item);
+            return Property.Replace(id, idx, item);
         }
 
         public bool Swap<T>(short id, int idxA, int idxB)
         {
-            return _property.Swap<T>(id, idxA, idxB);
+            return Property.Swap<T>(id, idxA, idxB);
         }
     }
 }
