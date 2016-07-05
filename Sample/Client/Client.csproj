@@ -43,9 +43,8 @@
       <HintPath>..\..\packages\protobuf-net.2.0.0.668\lib\net35\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="socket4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\socket4net.0.1.4\lib\net35\socket4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="socket4net">
+      <HintPath>..\..\..\Socket4Net\Publish\lib\net35\socket4net.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>

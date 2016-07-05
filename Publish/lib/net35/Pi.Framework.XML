@@ -33,6 +33,16 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
+        <member name="P:Pi.Framework.ConfigMgr.ConfigNamespace">
+            <summary>
+                Config namespace
+            </summary>
+        </member>
+        <member name="P:Pi.Framework.ConfigMgr.ConfigAssemblyName">
+            <summary>
+                Assembly name where config class belongs to
+            </summary>
+        </member>
         <member name="T:Pi.Framework.IFileLoader">
             <summary>
                 file loader interface
@@ -55,15 +65,46 @@
             csv 解析器
             </summary>
         </member>
+        <member name="M:Pi.Framework.IParser.Parse(System.String)">
+            <summary>
+                parse the specified file
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pi.Framework.IParser.Config">
+            <summary>
+               parse result
+            </summary>
+        </member>
         <member name="T:Pi.Framework.IStructParser">
             <summary>
                 结构化解析器
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.IStructParser.Parse(System.String)">
+            <summary>
+                parse the specified file
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pi.Framework.IStructParser.Config">
+            <summary>
+               parse result
             </summary>
         </member>
         <member name="T:Pi.Framework.IKeyValueParser">
             <summary>
             k-v 解析器
             </summary>
+        </member>
+        <member name="M:Pi.Framework.IKeyValueParser.Parse(Pi.Framework.IKeyValue,System.String)">
+            <summary>
+                parse the specified file
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
         </member>
         <member name="T:Pi.Framework.ICsv">
             <summary>
@@ -101,6 +142,11 @@
                 csv parser
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.KeyValueParser">
+            <summary>
+                key-value parser
+            </summary>
         </member>
         <member name="T:Pi.Framework.RichParser`1">
             <summary>
