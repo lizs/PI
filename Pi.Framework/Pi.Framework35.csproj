@@ -44,6 +44,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="csv\ConfigMgr.cs" />
+    <Compile Include="csv\FileLoader.cs" />
+    <Compile Include="csv\IConfig.cs" />
+    <Compile Include="csv\OrderAttribute.cs" />
+    <Compile Include="csv\Parser\CsvParser.cs" />
+    <Compile Include="csv\Parser\KeyValueParser.cs" />
+    <Compile Include="csv\Parser\RichCsvParser.cs" />
+    <Compile Include="csv\Parser\StructParser.cs" />
+    <Compile Include="csv\Summary.cs" />
     <Compile Include="DataProtocol.cs" />
     <Compile Include="DispatchableSession.cs" />
     <Compile Include="ecs\component\Component.cs" />

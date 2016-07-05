@@ -35,6 +35,7 @@ namespace Sample
         {
             base.SpawnJobs();
             Jobs.Create<ServerNodesMgr>(new NodesMgrArg(this, Config), false);
+            Jobs.Create<ConfigMgr>(new ConfigMgrArg(this, new WindowsFileLoader("Config/"), "Config/", false, "Sample", "Server"), false);
         }
 
         protected override void OnInit(ObjArg arg)

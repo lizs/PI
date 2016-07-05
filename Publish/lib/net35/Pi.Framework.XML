@@ -4,6 +4,116 @@
         <name>Pi.Framework</name>
     </assembly>
     <members>
+        <member name="T:Pi.Framework.IKeyValue">
+            <summary>
+            key-value 配置
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.ConfigMgr.GetKeyValue``1">
+            <summary>
+            获取Key-Vaue配置
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.ConfigMgr.GetValue``1(System.String)">
+            <summary>
+                获取value
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <typeparam name="TClass"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pi.Framework.ConfigMgr.GetStruct``1">
+            <summary>
+                获取结构化配置
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Pi.Framework.IFileLoader">
+            <summary>
+                file loader interface
+            </summary>
+        </member>
+        <member name="M:Pi.Framework.IFileLoader.Read(System.String)">
+            <summary>
+                read file from specified path to string
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Pi.Framework.WindowsFileLoader">
+            <summary>
+                windows file loader
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IParser">
+            <summary>
+            csv 解析器
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IStructParser">
+            <summary>
+                结构化解析器
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IKeyValueParser">
+            <summary>
+            k-v 解析器
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.ICsv">
+            <summary>
+                csv配置
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IStruct">
+            <summary>
+                结构化配置
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IOrdered">
+            <summary>
+            其成员拥有OrderAttribute的配置
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.IRichCsv`1">
+            <summary>
+            两层csv配置
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.IPhysicalCsv">
+            <summary>
+            实体配置
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.OrderComparer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Pi.Framework.Parser`1">
+            <summary>
+                csv parser
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.RichParser`1">
+            <summary>
+                rich csv file parser
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Pi.Framework.StructParser`1">
+            <summary>
+                结构化解析器
+                解析配置到一个单一的类对象中
+            </summary>
+        </member>
         <member name="T:Pi.Framework.Component">
             <summary>
                 组件

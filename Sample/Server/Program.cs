@@ -23,11 +23,19 @@
 //   * */
 #endregion
 using System;
+using System.Collections.Generic;
 using Pi.Framework;
 using socket4net;
 
 namespace Sample
 {
+    public class SampleConfig : ICsv
+    {
+        public int Id { get; set; }
+        public Pair<int> Pair { get; set; }
+        public List<Pair<int>> LstPair { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)

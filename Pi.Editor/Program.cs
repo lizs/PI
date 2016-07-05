@@ -1,6 +1,7 @@
 ﻿using System;
 using CommandLine;
 using CommandLine.Text;
+using socket4net;
 
 namespace Pi.Editor
 {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using socket4net;
 
 namespace Pi.Editor
 {

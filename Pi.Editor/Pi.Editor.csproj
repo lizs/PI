@@ -42,6 +42,9 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="socket4net">
+      <HintPath>..\..\Socket4Net\Publish\lib\net45\socket4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -58,7 +61,6 @@
     <Compile Include="Compiler.cs" />
     <Compile Include="Gen\EntityGenerator.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="FileSys.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Gen\BlocksGenerator.cs" />

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using socket4net;
 
 namespace Pi.Framework
 {
@@ -23,32 +24,39 @@ namespace Pi.Framework
 
         private static void DoCache(Assembly assembly)
         {
-            foreach (var type in assembly.GetTypes())
+            try
             {
-                if (type.IsAbstract || !type.IsSubclassOf(typeof (RpcComponent))) continue;
-
-                var usage =
-                    (AttributeUsageAttribute)
-                        typeof (ComponentIdAttribute).GetCustomAttributes(typeof (AttributeUsageAttribute), false)
-                            .FirstOrDefault();
-
-                var inherited = usage == null || usage.Inherited;
-                var attribute = type.GetCustomAttributes(typeof (ComponentIdAttribute), inherited)
-                    .Cast<ComponentIdAttribute>().First();
-
-                var componentId = attribute.Id;
-
-                if (_cache.ContainsKey(componentId))
+                foreach (var type in assembly.GetTypes())
                 {
-                    var existedType = _cache[componentId];
-                    if (type.IsSubclassOf(existedType))
-                        _cache[componentId] = existedType;
-                }
-                else
-                    _cache[componentId] = type;
+                    if (type.IsAbstract || !type.IsSubclassOf(typeof(RpcComponent))) continue;
 
-                if (!_inverserCache.ContainsKey(type))
-                    _inverserCache[type] = componentId;
+                    var usage =
+                        (AttributeUsageAttribute)
+                            typeof(ComponentIdAttribute).GetCustomAttributes(typeof(AttributeUsageAttribute), false)
+                                .FirstOrDefault();
+
+                    var inherited = usage == null || usage.Inherited;
+                    var attribute = type.GetCustomAttributes(typeof(ComponentIdAttribute), inherited)
+                        .Cast<ComponentIdAttribute>().First();
+
+                    var componentId = attribute.Id;
+
+                    if (_cache.ContainsKey(componentId))
+                    {
+                        var existedType = _cache[componentId];
+                        if (type.IsSubclassOf(existedType))
+                            _cache[componentId] = existedType;
+                    }
+                    else
+                        _cache[componentId] = type;
+
+                    if (!_inverserCache.ContainsKey(type))
+                        _inverserCache[type] = componentId;
+                }
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                Logger.Ins.Exception("", e);
             }
         }
 
